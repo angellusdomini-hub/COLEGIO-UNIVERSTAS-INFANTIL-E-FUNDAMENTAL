@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Agente Digital 3º Ano | Universitas</title><style>
+:root{--azul:#145da0;--azul2:#2f80ed;--verde:#20984f;--amarelo:#ffd84d;--vermelho:#d64545;--roxo:#7c3aed;--texto:#17324d}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(145deg,#edf6ff,#fff9e8);color:var(--texto)}
+header{background:linear-gradient(135deg,#0b4f91,#1475d1,#45a2f5);color:#fff;padding:18px 16px}.head{max-width:1150px;margin:auto;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(25px,5vw,42px)}header p{margin:4px 0 0;font-weight:800}.stats{display:flex;gap:8px;flex-wrap:wrap}.badge{background:#ffffff26;border:2px solid #ffffff42;border-radius:16px;padding:9px 12px;font-weight:900}
+.progressWrap{max-width:1150px;margin:12px auto 0;padding:0 16px}.progress{height:14px;background:#d7e8f7;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,#ffd84d,#22a447);width:0;transition:.25s}
+main{max-width:1150px;margin:20px auto;padding:0 16px 30px}.card{background:#fff;border:3px solid #d7e8f7;border-radius:26px;box-shadow:0 10px 28px #145da020;padding:22px}.center{text-align:center}
+.hero{font-size:76px}h2{font-size:clamp(27px,5vw,38px);margin:7px 0}.instrucao{font-size:clamp(19px,3vw,25px);font-weight:900;line-height:1.3;max-width:900px;margin:10px auto 16px}.sub{font-size:18px;line-height:1.45}
+button{border:0;border-radius:18px;cursor:pointer;font-weight:900;transition:.12s transform}.btn{padding:13px 19px;font-size:18px;color:#fff;background:var(--azul);box-shadow:0 5px 0 #0b467d}.btn.green{background:var(--verde);box-shadow:0 5px 0 #136c37}.btn.yellow{background:var(--amarelo);color:#4b3a00;box-shadow:0 5px 0 #c69a00}.btn.secondary{background:#fff;color:var(--azul);border:3px solid var(--azul);box-shadow:none}.listen{background:#eee8ff;color:#5b21b6;padding:9px 14px}
+.feedback{min-height:58px;max-width:820px;margin:14px auto;border-radius:18px;padding:13px 16px;font-size:20px;font-weight:900}.feedback.ok{background:#dcfce7;color:#166534}.feedback.no{background:#fee2e2;color:#991b1b}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}input{width:min(600px,95%);padding:14px 16px;border:3px solid #8fc7f5;border-radius:16px;font-size:21px}
+.choices{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;margin:16px 0}.choice{min-width:145px;min-height:105px;background:#fff;border:4px solid #badcf8;box-shadow:0 6px 0 #dcecf9;font-size:39px;padding:12px}.choice span{display:block;font-size:15px;color:#334155;margin-top:6px}
+.seqRow{display:flex;gap:9px;justify-content:center;align-items:center;flex-wrap:wrap;margin:15px 0}.seqItem{width:130px;height:108px;border:4px solid #c7d2fe;border-radius:18px;background:#fff;font-size:40px;display:flex;flex-direction:column;align-items:center;justify-content:center}.seqItem small{font-size:13px}
+.itemGrid{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.item{width:125px;height:95px;border:4px solid #d7e4ef;border-radius:18px;background:#fff;font-size:39px}.item.selected{border-color:#f59e0b;background:#fffbeb}
+.infoCard{max-width:830px;margin:16px auto;background:#eef7ff;border:3px solid #b9dcfb;border-radius:20px;padding:16px;font-size:19px;font-weight:800;line-height:1.4}
+.binary{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}.binBtn{min-width:210px;padding:17px;background:#fff;border:4px solid #badcf8;color:#173b70;font-size:20px}
+.board{display:grid;gap:6px;background:#173b70;padding:8px;border-radius:22px;width:min(92vw,470px);aspect-ratio:1;margin:0 auto}.cell{background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:clamp(25px,6vw,43px)}.cell.wall{background:#cbd5e1}
+.controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}.arrow{width:70px;height:60px;background:#fff;border:4px solid #8fc7f5;font-size:29px}.commands{min-height:60px;border:3px dashed #8fc7f5;border-radius:16px;padding:9px;max-width:780px;margin:13px auto;background:#f9fcff;font-size:27px}
+.codeBox{max-width:780px;margin:16px auto;background:#10253d;color:white;border-radius:18px;padding:16px;font-family:Consolas,monospace;font-size:19px;text-align:left;line-height:1.6}.wrong{background:#7f1d1d;padding:2px 5px;border-radius:6px}.good{background:#14532d;padding:2px 5px;border-radius:6px}
+.final{background:#fffbea;border:4px solid #f4cf4a;border-radius:23px;padding:20px}.cert{font-size:27px;font-weight:900;color:#0d4f9c}.report{overflow-x:auto;margin-top:18px}table{width:100%;border-collapse:collapse;font-size:13px}th,td{border:1px solid #cbd5e1;padding:7px;text-align:left}th{background:#145da0;color:#fff}
+.footer{text-align:center;color:#64748b;margin-top:14px;font-size:13px}
+.studentGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;max-width:980px;margin:18px auto}
+.student{padding:15px 12px;color:white;font-size:17px;min-height:66px;border:4px solid transparent}
+.student.selected{border-color:#111827;box-shadow:0 0 0 4px #fff inset}
+.nameBox{max-width:620px;margin:18px auto;display:grid;gap:10px;text-align:left}
+.nameBox label{font-size:18px;font-weight:900}
+
+@media(max-width:650px){.card{padding:16px 11px}.choice{min-width:115px;min-height:95px;font-size:34px}.seqItem{width:100px;height:95px;font-size:34px}.item{width:100px;height:85px}}
+@media print{header,.progressWrap,.noPrint,.footer{display:none!important}.card{border:none;box-shadow:none}body{background:#fff}}
+</style></head><body>
+<header><div class="head"><div><h1>🕵️ Agente Digital — Dados em Missão</h1><p>Universitas • 3º Ano • Educação Digital e Computação • 45 minutos</p></div><div class="stats"><div class="badge">🏁 Fase <span id="faseNum">1</span>/30</div><div class="badge">⭐ <span id="stars">0</span></div><div class="badge">❌ <span id="errors">0</span></div></div></div></header>
+<div class="progressWrap"><div class="progress"><div id="progressBar"></div></div></div><main><section class="card center" id="app"></section><div class="footer">Pensamento Computacional • Mundo Digital • Cultura Digital</div></main>
+<script>const phases=[{"t": "inicio", "title": "Identificação", "say": "Digite seu nome para iniciar a investigação."}, {"t": "data1", "title": "Dado ou informação?", "say": "Diferencie um dado isolado de uma informação com significado."}, {"t": "data2", "title": "Representação de dados", "say": "Reconheça diferentes formas de representar informações."}, {"t": "logic1", "title": "Verdadeiro e falso", "say": "Use lógica para analisar uma afirmação."}, {"t": "logic2", "title": "Negação", "say": "Descubra o contrário de uma condição."}, {"t": "cond1", "title": "SE... ENTÃO", "say": "Interprete uma condição simples."}, {"t": "cond2", "title": "SE... SENÃO", "say": "Escolha o resultado correto de uma decisão."}, {"t": "seq1", "title": "Decomposição 1", "say": "Divida uma tarefa em passos menores."}, {"t": "seq2", "title": "Decomposição 2", "say": "Organize etapas de envio de um trabalho."}, {"t": "input", "title": "Entrada", "say": "Identifique dispositivos de entrada."}, {"t": "output", "title": "Saída", "say": "Identifique dispositivos de saída."}, {"t": "both", "title": "Entrada e saída", "say": "Classifique uma situação de entrada e saída."}, {"t": "repeat", "title": "Repetição", "say": "Compacte comandos repetidos."}, {"t": "robot1", "title": "Algoritmo com condição", "say": "Leve o robô ao destino."}, {"t": "robot2", "title": "Algoritmo com obstáculos", "say": "Planeje um caminho seguro."}, {"t": "robot3", "title": "Coleta de dados", "say": "Colete estrelas no caminho."}, {"t": "robot4", "title": "Planejamento avançado", "say": "Colete duas estrelas e chegue ao fim."}, {"t": "debug1", "title": "Depuração 1", "say": "Encontre o erro lógico."}, {"t": "debug2", "title": "Depuração 2", "say": "Corrija uma sequência."}, {"t": "privacy1", "title": "Dados pessoais", "say": "Identifique informações que exigem proteção."}, {"t": "privacy2", "title": "Senha e privacidade", "say": "Escolha uma atitude segura."}, {"t": "search", "title": "Pesquisa na internet", "say": "Escolha uma estratégia de busca responsável."}, {"t": "source", "title": "Fonte confiável", "say": "Analise qual fonte parece mais adequada."}, {"t": "file", "title": "Arquivos e pastas", "say": "Organize arquivos de forma lógica."}, {"t": "network", "title": "Rede e internet", "say": "Entenda como dispositivos trocam dados."}, {"t": "challenge1", "title": "Desafio lógico", "say": "Resolva um problema com condição."}, {"t": "challenge2", "title": "Desafio de decomposição", "say": "Escolha a melhor divisão de uma tarefa."}, {"t": "challenge3", "title": "Desafio de dados", "say": "Interprete dados simples."}, {"t": "super", "title": "Superdesafio", "say": "Resolva sete desafios finais."}, {"t": "final", "title": "Investigação concluída", "say": "Veja seu relatório."}];
+
+const students=[
+ {full:'DAVI NOGUEIRA CARDOSO DE OLIVEIRA',first:'DAVI',color:'#2f80ed'},
+ {full:'MARIA ELIZA BECKER DA ROSA',first:'MARIA ELIZA',color:'#e84393'},
+ {full:'MIGUEL ZAMPRONIO DE ANDRADE',first:'MIGUEL',color:'#27ae60'}
+];
+let phase=0,stars=0,errors=0,name='',student=null,locked=false,seq=[],selected=new Set(),robot=null,phaseErrors=0,phaseStart=Date.now(),log=[],superStep=0;
+const app=document.getElementById('app');
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function norm(s){return(s||'').trim().toUpperCase().replace(/\s+/g,' ')}
+function speak(t){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='pt-BR';u.rate=.92;speechSynthesis.speak(u)}
+function stats(){document.getElementById('faseNum').textContent=phase+1;document.getElementById('stars').textContent=stars;document.getElementById('errors').textContent=errors;document.getElementById('progressBar').style.width=(phase/(phases.length-1)*100)+'%'}
+function fb(msg,ok){const e=document.getElementById('feedback');if(!e)return;e.className='feedback '+(ok?'ok':'no');e.innerHTML=msg;speak(msg.replace(/<[^>]*>/g,''))}
+function fail(msg='Tente novamente.'){errors++;phaseErrors++;stats();fb('💡 '+msg,false)}
+function savePhase(){if(phase===0||phase>=phases.length-1)return;log.push({fase:phase+1,titulo:phases[phase].title,erros:phaseErrors,tempo:Math.round((Date.now()-phaseStart)/1000)})}
+function complete(msg='Muito bem!'){if(locked)return;locked=true;stars++;stats();fb('⭐ '+msg,true);setTimeout(()=>{savePhase();phase++;phaseErrors=0;phaseStart=Date.now();locked=false;render()},800)}
+function base(p){return `<div class="hero">${p.t==='final'?'🏆':'🧠'}</div><h2>${p.title}</h2><div class="instrucao">${p.say}</div><button class="listen noPrint" onclick="speak('${p.say.replace(/'/g,"\\'")}')">🔊 Ouvir instrução</button>`}
+function startHTML(){
+ return `<div class="infoCard">1. Clique no seu nome na lista.<br>2. Depois, escreva o mesmo primeiro nome para confirmar.</div>
+ <div class="studentGrid">${students.map((s,i)=>`<button class="student" style="background:${s.color}" onclick="chooseStudent(${i},this)">${s.first}</button>`).join('')}</div>
+ <div class="nameBox">
+   <label>Agora escreva seu primeiro nome:</label>
+   <input id="nameInput" placeholder="DIGITE SEU NOME" autocomplete="off">
+   <button class="btn green" onclick="startGame()">🚀 COMEÇAR MISSÃO</button>
+ </div>
+ <div id="feedback" class="feedback"></div>`}
+function chooseStudent(i,el){
+ student=students[i];
+ document.querySelectorAll('.student').forEach(x=>x.classList.remove('selected'));
+ el.classList.add('selected');
+ speak('Nome escolhido: '+student.first);
+}
+function startGame(){
+ if(!student){fail('Primeiro clique no seu nome na lista.');return}
+ const v=norm(document.getElementById('nameInput').value);
+ if(v!==norm(student.first) && v!==norm(student.full)){fail('Digite o mesmo nome que você escolheu.');return}
+ name=student.full;
+ stars=0;errors=0;phase=1;phaseErrors=0;phaseStart=Date.now();render();
+}
+function patternHTML(text,opts,correct,msg){return `<div class="infoCard" style="font-size:30px">${text}</div><div class="choices">${shuffle(opts).map(o=>`<button class="choice" onclick="${o===correct?`complete('${msg.replace(/'/g,"\\'")}')`:`fail('Observe o padrão com atenção.')`}">${o}</button>`).join('')}</div><div id="feedback" class="feedback"></div>`}
+function seqUI(items,correct,msg){seq=[];window.seqCorrect=correct;window.seqMsg=msg;const s=shuffle(items);return `<div class="seqRow" id="chosenSeq"><span class="sub">Clique na ordem correta:</span></div><div class="choices">${s.map(x=>`<button class="seqItem" id="q-${x[0]}" onclick="addSeq('${x[0]}','${x[1]}')">${x[1]}<small>${x[2]}</small></button>`).join('')}</div><div class="actions noPrint"><button class="btn yellow" onclick="checkSeq()">✅ CONFERIR</button><button class="btn secondary" onclick="render()">🧹 LIMPAR</button></div><div id="feedback" class="feedback"></div>`}
+function addSeq(id,emoji){if(seq.includes(id))return;seq.push(id);document.getElementById('q-'+id).disabled=true;document.getElementById('chosenSeq').insertAdjacentHTML('beforeend',`<div class="seqItem">${emoji}<small>${seq.length}</small></div>`)}
+function checkSeq(){if(seq.length!==window.seqCorrect.length){fail('Escolha todos os passos.');return}if(seq.every((x,i)=>x===window.seqCorrect[i]))complete(window.seqMsg);else fail('A ordem ainda não está correta.')}
+function classUI(items,correct,msg){selected=new Set();window.classCorrect=correct;window.classMsg=msg;return `<div class="itemGrid">${shuffle(items).map(x=>`<button class="item" id="it-${x[0]}" onclick="toggle('${x[0]}')">${x[1]}</button>`).join('')}</div><div class="actions noPrint"><button class="btn yellow" onclick="checkClass()">✅ CONFERIR</button></div><div id="feedback" class="feedback"></div>`}
+function toggle(id){const e=document.getElementById('it-'+id);if(selected.has(id)){selected.delete(id);e.classList.remove('selected')}else{selected.add(id);e.classList.add('selected')}}
+function checkClass(){const c=window.classCorrect;if(selected.size===c.length&&c.every(x=>selected.has(x)))complete(window.classMsg);else fail('Revise suas escolhas.')}
+function mcq(question,opts,correct,msg){return `<div class="infoCard">${question}</div><div class="choices">${shuffle(opts).map(o=>`<button class="choice" onclick="${o===correct?`complete('${msg.replace(/'/g,"\\'")}')`:`fail('Essa opção não resolve o desafio.')`}"><span>${o}</span></button>`).join('')}</div><div id="feedback" class="feedback"></div>`}
+function robotHTML(){return `<div class="board" id="board"></div><div class="controls noPrint"><button class="arrow" onclick="addCmd('up')">⬆️</button><button class="arrow" onclick="addCmd('down')">⬇️</button><button class="arrow" onclick="addCmd('left')">⬅️</button><button class="arrow" onclick="addCmd('right')">➡️</button></div><div class="commands" id="cmds">Monte seus comandos aqui.</div><div class="actions noPrint"><button class="btn green" onclick="runRobot()">▶ EXECUTAR</button><button class="btn secondary" onclick="clearRobot()">🧹 LIMPAR</button></div><div id="feedback" class="feedback"></div>`}
+function setupRobot(cfg){robot={...cfg,pos:{...cfg.start},cmds:[],collected:[],running:false};const b=document.getElementById('board');b.style.gridTemplateColumns=`repeat(${cfg.cols},1fr)`;let h='';for(let r=0;r<cfg.rows;r++)for(let c=0;c<cfg.cols;c++)h+=`<div class="cell" data-r="${r}" data-c="${c}"></div>`;b.innerHTML=h;paintRobot()}
+function paintRobot(){document.querySelectorAll('.cell').forEach(e=>{const r=+e.dataset.r,c=+e.dataset.c;const wall=robot.walls.some(w=>w.r===r&&w.c===c),ri=robot.pos.r===r&&robot.pos.c===c,gi=robot.goal.r===r&&robot.goal.c===c,si=robot.stars.findIndex(s=>s.r===r&&s.c===c),col=si>=0&&robot.collected.includes(si);e.classList.toggle('wall',wall);e.textContent=wall?'🪨':ri?'🤖':(si>=0&&!col)?'⭐':gi?'🏁':''})}
+function addCmd(c){if(robot.running||robot.cmds.length>=24)return;robot.cmds.push(c);refreshCmds()}
+function refreshCmds(){const m={up:'⬆️',down:'⬇️',left:'⬅️',right:'➡️'};document.getElementById('cmds').innerHTML=robot.cmds.length?robot.cmds.map(x=>m[x]).join(' '):'Monte seus comandos aqui.'}
+function clearRobot(){if(robot.running)return;robot.cmds=[];robot.pos={...robot.start};robot.collected=[];refreshCmds();paintRobot()}
+async function runRobot(){if(robot.running)return;if(!robot.cmds.length){fail('Escolha alguns comandos.');return}robot.running=true;robot.pos={...robot.start};robot.collected=[];paintRobot();for(const c of robot.cmds){await new Promise(r=>setTimeout(r,280));let p={...robot.pos};if(c==='up')p.r--;if(c==='down')p.r++;if(c==='left')p.c--;if(c==='right')p.c++;const out=p.r<0||p.c<0||p.r>=robot.rows||p.c>=robot.cols,wall=robot.walls.some(w=>w.r===p.r&&w.c===p.c);if(out||wall){robot.running=false;fail(wall?'O robô bateu no obstáculo.':'O robô saiu do tabuleiro.');return}robot.pos=p;robot.stars.forEach((s,i)=>{if(s.r===p.r&&s.c===p.c&&!robot.collected.includes(i))robot.collected.push(i)});paintRobot()}robot.running=false;const goal=robot.pos.r===robot.goal.r&&robot.pos.c===robot.goal.c,all=robot.collected.length===robot.stars.length;if(goal&&all)complete('Algoritmo executado com sucesso!');else if(!all)fail('Ainda falta coletar uma estrela.');else fail('O robô ainda não chegou ao final.')}
+function finalHTML(label,summary){document.getElementById('progressBar').style.width='100%';const total=log.reduce((a,b)=>a+b.tempo,0);return `<div class="final"><div class="cert">🏆 ${label} 🏆</div><h2>${name}</h2><p class="instrucao">${summary}</p><p class="sub"><b>Estrelas:</b> ⭐ ${stars} &nbsp; <b>Erros:</b> ${errors} &nbsp; <b>Tempo registrado:</b> ${Math.max(1,Math.round(total/60))} min</p></div><div class="actions noPrint"><button class="btn green" onclick="window.print()">🖨️ IMPRIMIR RELATÓRIO</button><button class="btn secondary" onclick="location.reload()">🔁 NOVA ATIVIDADE</button></div><div class="report"><h3>Relatório por fase</h3><table><thead><tr><th>Fase</th><th>Desafio</th><th>Tempo</th><th>Erros</th></tr></thead><tbody>${log.map(x=>`<tr><td>${x.fase}</td><td>${x.titulo}</td><td>${x.tempo}s</td><td>${x.erros}</td></tr>`).join('')}</tbody></table></div>`}
+
+function render(){stats();const p=phases[phase];let h=base(p);
+if(p.t==='inicio')h+=startHTML();
+if(p.t==='data1')h+=mcq('Qual alternativa já é uma INFORMAÇÃO completa?',['17','17 ALUNOS PARTICIPARAM DA AULA','AZUL'],'17 ALUNOS PARTICIPARAM DA AULA','Dados ganham significado quando formam uma informação.');
+if(p.t==='data2')h+=classUI([['txt','❤️ AMOR'],['img','❤️'],['num','25'],['shoe','👟']],['txt','img'],'A mesma ideia pode ser representada por palavra e imagem.');
+if(p.t==='logic1')h+=mcq('5 é maior que 3. Essa afirmação é:',['VERDADEIRA','FALSA'],'VERDADEIRA','Você aplicou lógica booleana.');
+if(p.t==='logic2')h+=mcq('Qual é a negação de “O computador está ligado”?',['O COMPUTADOR NÃO ESTÁ LIGADO','O COMPUTADOR ESTÁ RÁPIDO','O COMPUTADOR TEM TECLADO'],'O COMPUTADOR NÃO ESTÁ LIGADO','Negar é inverter a condição.');
+if(p.t==='cond1')h+=mcq('SE a senha estiver correta, ENTÃO:',['PERMITIR ENTRADA','DESLIGAR A TELA','APAGAR O TECLADO'],'PERMITIR ENTRADA','Você interpretou uma condição.');
+if(p.t==='cond2')h+=mcq('SE a senha estiver correta, ENTRE. SENÃO:',['BLOQUEIE O ACESSO','IMPRIMA UMA FOTO','AUMENTE O VOLUME'],'BLOQUEIE O ACESSO','Isso é uma decisão com duas possibilidades.');
+if(p.t==='seq1')h+=seqUI([['choose','📌','ESCOLHER O TEMA'],['search','🔎','PESQUISAR'],['read','📖','LER'],['write','✍️','REGISTRAR']],['choose','search','read','write'],'Você decompôs uma pesquisa em etapas.');
+if(p.t==='seq2')h+=seqUI([['find','📁','LOCALIZAR ARQUIVO'],['open','🌐','ABRIR AMBIENTE'],['attach','📎','ANEXAR'],['send','📤','ENVIAR']],['find','open','attach','send'],'Tarefa complexa dividida em passos menores.');
+if(p.t==='input')h+=classUI([['k','⌨️'],['m','🖱️'],['mic','🎤'],['mon','🖥️'],['sp','🔊'],['pr','🖨️']],['k','m','mic'],'Dispositivos de entrada enviam dados ao computador.');
+if(p.t==='output')h+=classUI([['mon','🖥️'],['sp','🔊'],['pr','🖨️'],['k','⌨️'],['m','🖱️'],['mic','🎤']],['mon','sp','pr'],'Dispositivos de saída apresentam resultados.');
+if(p.t==='both')h+=mcq('Você fala no microfone e escuta sua voz na caixa de som. Isso envolve:',['ENTRADA E SAÍDA','SÓ ENTRADA','SÓ SAÍDA'],'ENTRADA E SAÍDA','Há entrada pelo microfone e saída pelo alto-falante.');
+if(p.t==='repeat')h+=mcq('➡️ ➡️ ➡️ ➡️ ➡️ pode ser simplificado para:',['REPITA 5 VEZES ➡️','REPITA 4 VEZES ➡️','REPITA 5 VEZES ⬅️'],'REPITA 5 VEZES ➡️','Você reconheceu repetição.');
+if(p.t.startsWith('robot'))h+=robotHTML();
+if(p.t==='debug1')h+=mcq('Objetivo: ir sempre para cima. Programa: ⬆️ ⬆️ ➡️ ⬆️. Qual é o erro?',['1º ⬆️','2º ⬆️','3º ➡️','4º ⬆️'],'3º ➡️','Erro localizado.');
+if(p.t==='debug2')h+=mcq('Complete para manter o padrão: ⬆️ ➡️ ⬆️ ➡️ ⬆️ ❓',['➡️','⬆️','⬅️'],'➡️','Sequência corrigida.');
+if(p.t==='privacy1')h+=classUI([['pass','🔐 SENHA'],['address','🏠 ENDEREÇO'],['color','🔵 COR FAVORITA'],['food','🍕 COMIDA FAVORITA']],['pass','address'],'Senha e endereço exigem proteção.');
+if(p.t==='privacy2')h+=mcq('Um site pede sua senha de outro aplicativo. O que fazer?',['NÃO INFORMAR E PEDIR AJUDA','DIGITAR RAPIDAMENTE','MANDAR PARA UM AMIGO'],'NÃO INFORMAR E PEDIR AJUDA','Boa prática de privacidade.');
+if(p.t==='search')h+=mcq('Para pesquisar sobre animais brasileiros, qual busca é mais clara?',['ANIMAIS BRASILEIROS HABITAT','COISAS LEGAIS','SITE'],'ANIMAIS BRASILEIROS HABITAT','Palavras-chave claras melhoram a busca.');
+if(p.t==='source')h+=mcq('Qual fonte parece mais adequada para uma pesquisa escolar?',['SITE DE UMA UNIVERSIDADE OU MUSEU','MENSAGEM ANÔNIMA SEM AUTOR','PROPAGANDA SEM FONTE'],'SITE DE UMA UNIVERSIDADE OU MUSEU','É importante observar autoria e confiabilidade.');
+if(p.t==='file')h+=mcq('Qual organização facilita encontrar um trabalho de Ciências?',['PASTA CIÊNCIAS > TRABALHOS','TODOS OS ARQUIVOS COM O NOME “COISA”','SALVAR EM QUALQUER LUGAR'],'PASTA CIÊNCIAS > TRABALHOS','Pastas e nomes claros ajudam a localizar arquivos.');
+if(p.t==='network')h+=mcq('Quando dois computadores trocam dados por uma rede, eles estão:',['SE COMUNICANDO','VIRANDO IMPRESSORAS','MUDANDO O TECLADO'],'SE COMUNICANDO','Redes permitem comunicação entre dispositivos.');
+if(p.t==='challenge1')h+=mcq('SE chover, leve guarda-chuva. Está chovendo. O que fazer?',['LEVAR GUARDA-CHUVA','NÃO FAZER NADA','DESLIGAR O COMPUTADOR'],'LEVAR GUARDA-CHUVA','Você aplicou uma condição.');
+if(p.t==='challenge2')h+=mcq('Qual é a melhor decomposição para “fazer uma apresentação”?',['PESQUISAR > ESCREVER > ORGANIZAR SLIDES > REVISAR','ABRIR O PROGRAMA E PRONTO','DIGITAR QUALQUER COISA'],'PESQUISAR > ESCREVER > ORGANIZAR SLIDES > REVISAR','Boa decomposição.');
+if(p.t==='challenge3')h+=mcq('Dados: 8 alunos escolheram azul e 5 escolheram verde. Qual cor teve mais escolhas?',['AZUL','VERDE','EMPATE'],'AZUL','Você interpretou os dados.');
+if(p.t==='super')h+=superHTML3();
+if(p.t==='final')h+=finalHTML('AGENTE DIGITAL — NÍVEL 3','Você trabalhou dados, informação, lógica, condições, decomposição, entrada e saída, programação, depuração, pesquisa e privacidade.');
+app.innerHTML=h;
+if(p.t==='robot1')setupRobot({rows:5,cols:5,start:{r:4,c:0},goal:{r:0,c:4},walls:[],stars:[]});
+if(p.t==='robot2')setupRobot({rows:5,cols:5,start:{r:4,c:0},goal:{r:0,c:4},walls:[{r:3,c:1},{r:2,c:1},{r:1,c:3}],stars:[]});
+if(p.t==='robot3')setupRobot({rows:5,cols:5,start:{r:4,c:0},goal:{r:0,c:4},walls:[{r:3,c:1},{r:2,c:1}],stars:[{r:3,c:3}]});
+if(p.t==='robot4')setupRobot({rows:6,cols:6,start:{r:5,c:0},goal:{r:0,c:5},walls:[{r:4,c:1},{r:3,c:1},{r:3,c:3},{r:2,c:3},{r:1,c:4}],stars:[{r:5,c:3},{r:1,c:2}]});
+}
+function superHTML3(){superStep=0;return `<div id="superArea">${superQ3()}</div><div id="feedback" class="feedback"></div>`}
+function superQ3(){
+const qs=[
+['Qual alternativa é uma informação?',['25','25 ALUNOS ESTÃO PRESENTES'],'25 ALUNOS ESTÃO PRESENTES'],
+['SE a senha estiver errada, o sistema deve:',['BLOQUEAR ACESSO','LIBERAR ACESSO'],'BLOQUEAR ACESSO'],
+['Qual é entrada?',['⌨️ TECLADO','🖥️ MONITOR'],'⌨️ TECLADO'],
+['Qual é saída?',['🔊 CAIXA DE SOM','🎤 MICROFONE'],'🔊 CAIXA DE SOM'],
+['Qual dado deve ser protegido?',['SENHA','COR FAVORITA'],'SENHA'],
+['Qual busca é mais específica?',['DINOSSAUROS ALIMENTAÇÃO','COISAS ANTIGAS'],'DINOSSAUROS ALIMENTAÇÃO'],
+['Qual é melhor organização?',['PASTAS COM NOMES CLAROS','ARQUIVOS ESPALHADOS'],'PASTAS COM NOMES CLAROS']
+];const q=qs[superStep];return `<div class="infoCard">${superStep+1}. ${q[0]}</div><div class="choices">${shuffle(q[1]).map(o=>`<button class="choice" onclick="superAns3(${JSON.stringify(o===q[2])})"><span>${o}</span></button>`).join('')}</div>`}
+function superAns3(ok){if(!ok){errors++;phaseErrors++;stats();fb('💡 Revise e tente novamente.',false);return}stars++;stats();superStep++;if(superStep<7){fb('⭐ Correto!',true);setTimeout(()=>{document.getElementById('superArea').innerHTML=superQ3();document.getElementById('feedback').className='feedback';document.getElementById('feedback').innerHTML=''},500)}else{fb('⭐ Superdesafio concluído!',true);setTimeout(()=>{savePhase();phase++;phaseErrors=0;phaseStart=Date.now();render()},800)}}
+render();</script></body></html>
