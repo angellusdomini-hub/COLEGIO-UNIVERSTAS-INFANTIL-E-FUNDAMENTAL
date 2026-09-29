@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missão Código — 4º Ano</title>
+<style>
+:root{
+  --bg:#f4f7fb;--card:#fff;--ink:#20304a;--muted:#6b768a;
+  --primary:#4f63d8;--primary2:#7a8bf0;--ok:#2f9d64;
+  --bad:#d9534f;--warn:#efa33a;--line:#dce2ee;--soft:#eef1ff;
+  --teacher:#fff7d9;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;padding:20px 16px}
+.header{max-width:1100px;margin:auto;display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+h1,h2,h3{margin-top:0} h2,h3{color:#3448b3}
+.status{background:rgba(255,255,255,.16);padding:10px 14px;border-radius:14px}
+.progress-shell{height:10px;background:#dfe4ef}
+.progress{height:10px;width:0;background:#2fb56f;transition:.25s}
+main{max-width:1100px;margin:auto;padding:22px 16px 40px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 22px rgba(30,40,70,.07)}
+.hidden{display:none!important}
+.tag{display:inline-block;background:var(--soft);color:#3448b3;padding:6px 10px;border-radius:999px;font-weight:bold;font-size:13px;margin-bottom:10px}
+.callout{background:var(--soft);border-left:6px solid var(--primary);padding:14px;border-radius:10px;margin:14px 0;line-height:1.55}
+.teacher{background:var(--teacher);border-left:6px solid var(--warn);padding:14px;border-radius:10px;margin:14px 0}
+.exercise-area{margin-top:20px;border-top:2px solid var(--line);padding-top:18px}
+.exercise{border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:16px;background:#fbfcff}
+.exercise.locked{opacity:.48}
+button{border:none;border-radius:12px;padding:12px 16px;min-height:44px;font-size:16px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.55;cursor:not-allowed}
+.primary{background:var(--primary);color:#fff}
+.secondary{background:#edf0f6;color:var(--ink);border:1px solid var(--line)}
+.success{background:var(--ok);color:#fff}
+.teacher-btn{background:var(--warn);color:#3e2b00}
+.choice{background:#fff;border:2px solid var(--line);color:var(--ink);margin:4px}
+.choice:hover{border-color:#aab5d4}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sequence-box{min-height:58px;border:2px dashed #aeb8cf;border-radius:12px;padding:12px;background:#fff}
+.feedback{margin-top:12px;padding:12px;border-radius:10px;font-weight:bold}
+.feedback.ok{background:#e2f5ea;color:#17613c}
+.feedback.bad{background:#fde8e8;color:#8d2929}
+.feedback.info{background:#edf1ff;color:#3345a2}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.matrix{display:grid;grid-template-columns:repeat(5,minmax(48px,72px));gap:5px;justify-content:center;margin:16px auto}
+.cell{aspect-ratio:1;background:#fafbfe;border:2px solid #cfd6e5;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:27px;position:relative}
+.coord{position:absolute;top:3px;left:4px;font-size:10px;color:#6c7485}
+.target{background:#fff5bf}.robot{background:#e9f0ff}
+.command-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.codebox{min-height:58px;background:#1f2633;color:#fff;padding:14px;border-radius:12px;font-size:20px;line-height:1.5}
+input[type=text]{width:100%;padding:12px;border:2px solid var(--line);border-radius:10px;font-size:16px}
+.score-big{font-size:48px;font-weight:bold;color:var(--primary);text-align:center}
+.badge{font-size:72px;text-align:center}
+footer{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
+@media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}.matrix{grid-template-columns:repeat(5,minmax(42px,1fr))}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header">
+    <div>
+      <h1>🤖 Missão Código</h1>
+      <div>4º Ano • Lógica de Programação</div>
+    </div>
+    <div class="status">⭐ Pontos: <strong id="score">0</strong>/100<br>🚩 Fase: <strong id="stageLabel">Início</strong></div>
+  </div>
+</header>
+<div class="progress-shell"><div class="progress" id="progress"></div></div>
+
+<main>
+
+<section class="panel" id="start">
+  <span class="tag">AULA DE 45 MINUTOS</span>
+  <h2>Começando a missão</h2>
+  <p>A aula será conduzida em pequenos blocos. Em cada fase:</p>
+  <div class="callout">
+    📘 Primeiro: <strong>explicação do professor</strong><br>
+    👨‍🏫 Depois: o professor clica em <strong>LIBERAR EXERCÍCIOS</strong><br>
+    ✏️ Os alunos fazem <strong>3 exercícios</strong><br>
+    ➡️ Após concluir, o professor avança para o próximo tópico
+  </div>
+  <label><strong>Digite seu nome:</strong></label>
+  <input id="studentName" type="text" maxlength="40" placeholder="Seu nome">
+  <div class="actions"><button class="primary" id="startBtn">COMEÇAR A AULA ▶</button></div>
+</section>
+
+<!-- FASE 1 -->
+<section class="panel hidden phase" id="p1">
+  <span class="tag">FASE 1 • ALGORITMOS</span>
+  <h2>1. O que é um algoritmo?</h2>
+
+  <div class="callout">
+    Um <strong>algoritmo</strong> é uma sequência organizada de passos para realizar uma tarefa.
+  </div>
+
+  <p>Imagine que você queira ensinar um robô a escovar os dentes. Ele não sabe fazer isso sozinho. Você precisa dar instruções claras e na ordem correta.</p>
+
+  <div class="sequence-box">
+    1. Pegar a escova → 2. Colocar pasta → 3. Escovar → 4. Enxaguar
+  </div>
+
+  <p><strong>Ideia principal:</strong> programar é dar instruções. Um algoritmo organiza essas instruções.</p>
+
+  <div class="teacher">
+    <strong>👨‍🏫 Momento do professor:</strong><br>
+    Pergunte aos alunos: “Que tarefa do dia a dia também precisa de passos em ordem?”<br>
+    Sugestões: fazer um sanduíche, tomar banho, ligar o computador, entrar em um jogo.
+  </div>
+
+  <div class="actions">
+    <button class="teacher-btn releaseBtn" data-phase="p1">👨‍🏫 LIBERAR EXERCÍCIOS</button>
+  </div>
+
+  <div class="exercise-area hidden" id="p1ex">
+    <h2>✏️ Agora pratique</h2>
+
+    <div class="exercise">
+      <h3>Exercício 1</h3>
+      <p>Qual alternativa representa um algoritmo?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p1q1" data-ok="0">🍕 Uma pizza pronta</button>
+        <button class="choice q" data-q="p1q1" data-ok="1">🪥 Pegar escova → colocar pasta → escovar</button>
+        <button class="choice q" data-q="p1q1" data-ok="0">🎨 A cor azul</button>
+        <button class="choice q" data-q="p1q1" data-ok="0">🖥️ Um computador</button>
+      </div>
+      <div id="p1q1f"></div>
+    </div>
+
+    <div class="exercise locked" id="p1e2">
+      <h3>Exercício 2</h3>
+      <p>Qual tarefa precisa de uma sequência organizada?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p1q2" data-ok="1">🥪 Fazer um sanduíche</button>
+        <button class="choice q" data-q="p1q2" data-ok="0">🔵 Olhar uma cor</button>
+        <button class="choice q" data-q="p1q2" data-ok="0">☀️ Ver o sol</button>
+        <button class="choice q" data-q="p1q2" data-ok="0">🎵 Ouvir um som</button>
+      </div>
+      <div id="p1q2f"></div>
+    </div>
+
+    <div class="exercise locked" id="p1e3">
+      <h3>Exercício 3</h3>
+      <p>Complete: ligar o computador → entrar no sistema → ________.</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p1q3" data-ok="1">Abrir o programa</button>
+        <button class="choice q" data-q="p1q3" data-ok="0">Desligar o computador</button>
+        <button class="choice q" data-q="p1q3" data-ok="0">Fechar a tela</button>
+        <button class="choice q" data-q="p1q3" data-ok="0">Tirar o teclado</button>
+      </div>
+      <div id="p1q3f"></div>
+    </div>
+
+    <div class="teacher hidden" id="p1done">
+      <strong>👨‍🏫 Fase concluída.</strong> Faça uma retomada rápida: “O que é algoritmo?” Depois avance.
+      <div class="actions"><button class="primary nextPhase" data-target="p2">CONTINUAR PARA O PRÓXIMO TÓPICO ➜</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 2 -->
+<section class="panel hidden phase" id="p2">
+  <span class="tag">FASE 2 • ORDEM DOS COMANDOS</span>
+  <h2>2. A ordem dos comandos importa</h2>
+
+  <div class="callout">
+    O computador executa exatamente os comandos na ordem em que foram dados.
+  </div>
+
+  <p>Veja este exemplo para entrar em um site:</p>
+  <div class="sequence-box">
+    1. Ligar o computador → 2. Entrar no sistema → 3. Abrir o navegador → 4. Digitar o endereço
+  </div>
+
+  <p>Se tentarmos abrir o navegador antes de ligar o computador, a sequência não funciona.</p>
+
+  <div class="teacher">
+    <strong>👨‍🏫 Momento do professor:</strong><br>
+    Troque oralmente dois passos e pergunte: “O que daria errado?”
+  </div>
+
+  <div class="actions"><button class="teacher-btn releaseBtn" data-phase="p2">👨‍🏫 LIBERAR EXERCÍCIOS</button></div>
+
+  <div class="exercise-area hidden" id="p2ex">
+    <h2>✏️ Agora pratique</h2>
+
+    <div class="exercise">
+      <h3>Exercício 1</h3>
+      <p>Monte a sequência correta:</p>
+      <div id="seqOptions1" class="grid2"></div>
+      <div class="sequence-box" id="seqAnswer1">Nenhum passo escolhido.</div>
+      <div class="actions"><button class="success" id="seqCheck1">Executar</button><button class="secondary" id="seqClear1">Apagar</button></div>
+      <div id="p2q1f"></div>
+    </div>
+
+    <div class="exercise locked" id="p2e2">
+      <h3>Exercício 2</h3>
+      <p>Qual é a ordem correta para acessar um site?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p2q2" data-ok="1">Abrir navegador → digitar endereço → acessar site</button>
+        <button class="choice q" data-q="p2q2" data-ok="0">Acessar site → abrir navegador → digitar endereço</button>
+        <button class="choice q" data-q="p2q2" data-ok="0">Digitar endereço → desligar → abrir navegador</button>
+        <button class="choice q" data-q="p2q2" data-ok="0">Desligar → acessar site → abrir navegador</button>
+      </div>
+      <div id="p2q2f"></div>
+    </div>
+
+    <div class="exercise locked" id="p2e3">
+      <h3>Exercício 3</h3>
+      <p>Se tentarmos abrir um programa antes de ligar o computador:</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p2q3" data-ok="1">O algoritmo não funciona corretamente</button>
+        <button class="choice q" data-q="p2q3" data-ok="0">Funciona igual</button>
+        <button class="choice q" data-q="p2q3" data-ok="0">O computador adivinha</button>
+        <button class="choice q" data-q="p2q3" data-ok="0">A ordem nunca importa</button>
+      </div>
+      <div id="p2q3f"></div>
+    </div>
+
+    <div class="teacher hidden" id="p2done">
+      <strong>👨‍🏫 Fase concluída.</strong> Reforce: “Uma sequência errada produz um resultado errado.”
+      <div class="actions"><button class="primary nextPhase" data-target="p3">CONTINUAR PARA O PRÓXIMO TÓPICO ➜</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 3 -->
+<section class="panel hidden phase" id="p3">
+  <span class="tag">FASE 3 • MATRIZES E COORDENADAS</span>
+  <h2>3. Matrizes e coordenadas</h2>
+
+  <div class="callout">
+    Uma matriz organiza espaços em <strong>linhas</strong> e <strong>colunas</strong>.
+  </div>
+
+  <p>Cada espaço pode ser localizado por uma coordenada.</p>
+  <div class="sequence-box">
+    <strong>L2,C4</strong> = Linha 2, Coluna 4
+  </div>
+
+  <p>Sempre lemos primeiro a linha e depois a coluna.</p>
+
+  <div class="teacher">
+    <strong>👨‍🏫 Momento do professor:</strong><br>
+    Mostre exemplos oralmente: L1,C1; L3,C2; L5,C4.
+  </div>
+
+  <div class="actions"><button class="teacher-btn releaseBtn" data-phase="p3">👨‍🏫 LIBERAR EXERCÍCIOS</button></div>
+
+  <div class="exercise-area hidden" id="p3ex">
+    <h2>✏️ Agora pratique</h2>
+
+    <div class="exercise">
+      <h3>Exercício 1</h3>
+      <div class="matrix" id="coordMatrix1"></div>
+      <p>Em qual coordenada está a ⭐?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p3q1" data-ok="1">L2,C4</button>
+        <button class="choice q" data-q="p3q1" data-ok="0">L4,C2</button>
+        <button class="choice q" data-q="p3q1" data-ok="0">L2,C3</button>
+        <button class="choice q" data-q="p3q1" data-ok="0">L3,C4</button>
+      </div>
+      <div id="p3q1f"></div>
+    </div>
+
+    <div class="exercise locked" id="p3e2">
+      <h3>Exercício 2</h3>
+      <div class="matrix" id="coordMatrix2"></div>
+      <p>Em qual coordenada está o 🤖?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p3q2" data-ok="0">L1,C5</button>
+        <button class="choice q" data-q="p3q2" data-ok="1">L4,C2</button>
+        <button class="choice q" data-q="p3q2" data-ok="0">L2,C4</button>
+        <button class="choice q" data-q="p3q2" data-ok="0">L5,C1</button>
+      </div>
+      <div id="p3q2f"></div>
+    </div>
+
+    <div class="exercise locked" id="p3e3">
+      <h3>Exercício 3</h3>
+      <p>O que significa L3,C5?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p3q3" data-ok="1">Linha 3, Coluna 5</button>
+        <button class="choice q" data-q="p3q3" data-ok="0">Linha 5, Coluna 3</button>
+        <button class="choice q" data-q="p3q3" data-ok="0">3 linhas e 5 matrizes</button>
+        <button class="choice q" data-q="p3q3" data-ok="0">Coluna 3, Linha 3</button>
+      </div>
+      <div id="p3q3f"></div>
+    </div>
+
+    <div class="teacher hidden" id="p3done">
+      <strong>👨‍🏫 Fase concluída.</strong> Peça um exemplo: “Qual coordenada seria Linha 4, Coluna 3?”
+      <div class="actions"><button class="primary nextPhase" data-target="p4">CONTINUAR PARA O PRÓXIMO TÓPICO ➜</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 4 -->
+<section class="panel hidden phase" id="p4">
+  <span class="tag">FASE 4 • COMANDOS DE MOVIMENTO</span>
+  <h2>4. Movendo o robô</h2>
+
+  <div class="callout">
+    Podemos programar um robô usando comandos de direção.
+  </div>
+
+  <div class="command-bar">
+    <button class="choice" disabled>⬆️ CIMA</button>
+    <button class="choice" disabled>⬇️ BAIXO</button>
+    <button class="choice" disabled>⬅️ ESQUERDA</button>
+    <button class="choice" disabled>➡️ DIREITA</button>
+  </div>
+
+  <p>Exemplo: ➡️ ➡️ ⬆️ significa duas casas para a direita e uma para cima.</p>
+
+  <div class="teacher">
+    <strong>👨‍🏫 Momento do professor:</strong><br>
+    Faça uma sequência corporal com a turma: “1 passo para a direita, 1 para frente, 1 para a esquerda”.
+  </div>
+
+  <div class="actions"><button class="teacher-btn releaseBtn" data-phase="p4">👨‍🏫 LIBERAR EXERCÍCIOS</button></div>
+
+  <div class="exercise-area hidden" id="p4ex">
+    <h2>✏️ Agora pratique</h2>
+
+    <div class="exercise">
+      <h3>Exercício 1</h3>
+      <p>O robô está em L3,C3. Qual comando o leva para L3,C4?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p4q1" data-ok="0">⬆️</button>
+        <button class="choice q" data-q="p4q1" data-ok="0">⬅️</button>
+        <button class="choice q" data-q="p4q1" data-ok="1">➡️</button>
+        <button class="choice q" data-q="p4q1" data-ok="0">⬇️</button>
+      </div>
+      <div id="p4q1f"></div>
+    </div>
+
+    <div class="exercise locked" id="p4e2">
+      <h3>Exercício 2</h3>
+      <p>O robô está em L4,C2 e precisa chegar em L2,C2. Qual sequência funciona?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p4q2" data-ok="1">⬆️ ⬆️</button>
+        <button class="choice q" data-q="p4q2" data-ok="0">➡️ ➡️</button>
+        <button class="choice q" data-q="p4q2" data-ok="0">⬇️ ⬇️</button>
+        <button class="choice q" data-q="p4q2" data-ok="0">⬅️ ⬅️</button>
+      </div>
+      <div id="p4q2f"></div>
+    </div>
+
+    <div class="exercise locked" id="p4e3">
+      <h3>Exercício 3 — Programe o robô</h3>
+      <p>Leve 🤖 de L5,C1 até ⭐ em L1,C5.</p>
+      <div class="matrix" id="robotMatrix"></div>
+      <div class="command-bar">
+        <button class="choice move" data-move="U">⬆️ CIMA</button>
+        <button class="choice move" data-move="D">⬇️ BAIXO</button>
+        <button class="choice move" data-move="L">⬅️ ESQUERDA</button>
+        <button class="choice move" data-move="R">➡️ DIREITA</button>
+      </div>
+      <div class="codebox" id="robotCode">Nenhum comando.</div>
+      <div class="actions"><button class="success" id="robotRun">Executar</button><button class="secondary" id="robotClear">Apagar</button></div>
+      <div id="p4q3f"></div>
+    </div>
+
+    <div class="teacher hidden" id="p4done">
+      <strong>👨‍🏫 Fase concluída.</strong> Reforce que vários comandos juntos formam um algoritmo de movimento.
+      <div class="actions"><button class="primary nextPhase" data-target="p5">CONTINUAR PARA O PRÓXIMO TÓPICO ➜</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 5 -->
+<section class="panel hidden phase" id="p5">
+  <span class="tag">FASE 5 • REPETIÇÕES</span>
+  <h2>5. Repetições</h2>
+
+  <div class="callout">
+    Quando um comando aparece várias vezes, podemos usar uma repetição.
+  </div>
+
+  <div class="sequence-box">
+    ➡️ ➡️ ➡️ ➡️ = <strong>REPITA 4 VEZES ➡️</strong>
+  </div>
+
+  <p>Isso deixa o algoritmo menor e mais eficiente.</p>
+
+  <div class="teacher">
+    <strong>👨‍🏫 Momento do professor:</strong><br>
+    Diga “bater palmas 5 vezes” e compare com escrever “palma, palma, palma, palma, palma”.
+  </div>
+
+  <div class="actions"><button class="teacher-btn releaseBtn" data-phase="p5">👨‍🏫 LIBERAR EXERCÍCIOS</button></div>
+
+  <div class="exercise-area hidden" id="p5ex">
+    <h2>✏️ Agora pratique</h2>
+
+    <div class="exercise">
+      <h3>Exercício 1</h3>
+      <p>Como representar ➡️ ➡️ ➡️ ➡️?</p>
+      <div class="grid3">
+        <button class="choice q" data-q="p5q1" data-ok="0">REPITA 3 VEZES ➡️</button>
+        <button class="choice q" data-q="p5q1" data-ok="1">REPITA 4 VEZES ➡️</button>
+        <button class="choice q" data-q="p5q1" data-ok="0">REPITA 5 VEZES ➡️</button>
+      </div>
+      <div id="p5q1f"></div>
+    </div>
+
+    <div class="exercise locked" id="p5e2">
+      <h3>Exercício 2</h3>
+      <p>Qual representa ⬆️ ⬆️ ⬆️ ➡️ ➡️?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p5q2" data-ok="1">REPITA 3 VEZES ⬆️, depois REPITA 2 VEZES ➡️</button>
+        <button class="choice q" data-q="p5q2" data-ok="0">REPITA 2 VEZES ⬆️, depois REPITA 3 VEZES ➡️</button>
+        <button class="choice q" data-q="p5q2" data-ok="0">REPITA 5 VEZES ⬆️</button>
+        <button class="choice q" data-q="p5q2" data-ok="0">REPITA 5 VEZES ➡️</button>
+      </div>
+      <div id="p5q2f"></div>
+    </div>
+
+    <div class="exercise locked" id="p5e3">
+      <h3>Exercício 3</h3>
+      <p>Para andar 6 casas para cima, qual é mais eficiente?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p5q3" data-ok="0">⬆️ ⬆️ ⬆️ ⬆️ ⬆️ ⬆️</button>
+        <button class="choice q" data-q="p5q3" data-ok="1">REPITA 6 VEZES ⬆️</button>
+        <button class="choice q" data-q="p5q3" data-ok="0">REPITA 5 VEZES ⬆️</button>
+        <button class="choice q" data-q="p5q3" data-ok="0">REPITA 6 VEZES ➡️</button>
+      </div>
+      <div id="p5q3f"></div>
+    </div>
+
+    <div class="teacher hidden" id="p5done">
+      <strong>👨‍🏫 Fase concluída.</strong> Pergunte: “Por que usar REPITA economiza trabalho?”
+      <div class="actions"><button class="primary nextPhase" data-target="p6">CONTINUAR PARA O PRÓXIMO TÓPICO ➜</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 6 -->
+<section class="panel hidden phase" id="p6">
+  <span class="tag">FASE 6 • DEPURAÇÃO</span>
+  <h2>6. Encontrando e corrigindo erros</h2>
+
+  <div class="callout">
+    Encontrar e corrigir um erro em um algoritmo chama-se <strong>depuração</strong> ou <strong>debugging</strong>.
+  </div>
+
+  <p>Um erro em programação também pode ser chamado de <strong>bug</strong> 🐞.</p>
+
+  <div class="sequence-box">
+    Se deveria ser ➡️ ➡️ ⬇️ ➡️, mas aparece ➡️ ➡️ ⬆️ ➡️, precisamos encontrar o comando errado.
+  </div>
+
+  <div class="teacher">
+    <strong>👨‍🏫 Momento do professor:</strong><br>
+    Explique que errar faz parte da programação. O importante é testar, observar e corrigir.
+  </div>
+
+  <div class="actions"><button class="teacher-btn releaseBtn" data-phase="p6">👨‍🏫 LIBERAR EXERCÍCIOS</button></div>
+
+  <div class="exercise-area hidden" id="p6ex">
+    <h2>✏️ Agora pratique</h2>
+
+    <div class="exercise">
+      <h3>Exercício 1</h3>
+      <p>Correto: ➡️ ➡️ ⬇️ ➡️</p>
+      <div class="codebox">1. ➡️<br>2. ➡️<br>3. ⬆️<br>4. ➡️</div>
+      <p>Onde está o erro?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p6q1" data-ok="0">Linha 1</button>
+        <button class="choice q" data-q="p6q1" data-ok="0">Linha 2</button>
+        <button class="choice q" data-q="p6q1" data-ok="1">Linha 3</button>
+        <button class="choice q" data-q="p6q1" data-ok="0">Linha 4</button>
+      </div>
+      <div id="p6q1f"></div>
+    </div>
+
+    <div class="exercise locked" id="p6e2">
+      <h3>Exercício 2</h3>
+      <p>Qual comando deveria aparecer na linha 3?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p6q2" data-ok="1">⬇️ BAIXO</button>
+        <button class="choice q" data-q="p6q2" data-ok="0">⬅️ ESQUERDA</button>
+        <button class="choice q" data-q="p6q2" data-ok="0">➡️ DIREITA</button>
+        <button class="choice q" data-q="p6q2" data-ok="0">⬆️ CIMA</button>
+      </div>
+      <div id="p6q2f"></div>
+    </div>
+
+    <div class="exercise locked" id="p6e3">
+      <h3>Exercício 3</h3>
+      <p>O que significa depuração?</p>
+      <div class="grid2">
+        <button class="choice q" data-q="p6q3" data-ok="1">Encontrar e corrigir erros no algoritmo</button>
+        <button class="choice q" data-q="p6q3" data-ok="0">Apagar tudo</button>
+        <button class="choice q" data-q="p6q3" data-ok="0">Desligar o computador</button>
+        <button class="choice q" data-q="p6q3" data-ok="0">Trocar comandos sem testar</button>
+      </div>
+      <div id="p6q3f"></div>
+    </div>
+
+    <div class="teacher hidden" id="p6done">
+      <strong>👨‍🏫 Fase concluída.</strong> Retome os seis conceitos antes da missão final.
+      <div class="actions"><button class="primary nextPhase" data-target="final">IR PARA A MISSÃO FINAL 🏁</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="panel hidden" id="final">
+  <span class="tag">MISSÃO FINAL</span>
+  <h2>🏁 Desafio final</h2>
+
+  <div class="teacher">
+    <strong>👨‍🏫 Professor:</strong> agora libere o desafio final para verificar se os alunos compreenderam os conceitos.
+  </div>
+
+  <div class="callout">
+    O robô começa em L4,C1. Ele precisa subir 3 casas e depois andar 4 casas para a direita.
+  </div>
+
+  <div class="grid2">
+    <button class="choice q" data-q="finalq" data-ok="0">REPITA 4 VEZES ⬆️, depois REPITA 3 VEZES ➡️</button>
+    <button class="choice q" data-q="finalq" data-ok="1">REPITA 3 VEZES ⬆️, depois REPITA 4 VEZES ➡️</button>
+    <button class="choice q" data-q="finalq" data-ok="0">REPITA 2 VEZES ⬆️, depois REPITA 4 VEZES ➡️</button>
+    <button class="choice q" data-q="finalq" data-ok="0">REPITA 3 VEZES ➡️, depois REPITA 4 VEZES ⬆️</button>
+  </div>
+  <div id="finalqf"></div>
+</section>
+
+<section class="panel hidden" id="finish">
+  <div class="badge">🏅</div>
+  <h2 style="text-align:center">Missão concluída!</h2>
+  <p id="finishName" style="text-align:center;font-size:20px"></p>
+  <div class="score-big"><span id="finalScore">0</span>/100</div>
+  <div class="callout">
+    ✅ Algoritmos<br>
+    ✅ Ordem dos comandos<br>
+    ✅ Matrizes e coordenadas<br>
+    ✅ Movimentos<br>
+    ✅ Repetições<br>
+    ✅ Depuração
+  </div>
+  <div class="actions"><button class="primary" id="restartAll">↻ JOGAR NOVAMENTE</button></div>
+</section>
+
+<footer>Missão Código • 4º Ano • Pensamento Computacional</footer>
+</main>
+
+<script>
+const phases=["start","p1","p2","p3","p4","p5","p6","final","finish"];
+let current=0,score=0,studentName="";
+const scoreEl=document.getElementById("score");
+const progress=document.getElementById("progress");
+const stageLabel=document.getElementById("stageLabel");
+
+function show(id){
+  phases.forEach(x=>document.getElementById(x).classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+  current=phases.indexOf(id);
+  const labels=["Início","1/6","2/6","3/6","4/6","5/6","6/6","Final","Fim"];
+  stageLabel.textContent=labels[current];
+  progress.style.width=(current/(phases.length-1)*100)+"%";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function addScore(n){score=Math.min(100,score+n);scoreEl.textContent=score}
+function fb(id,type,text){const e=document.getElementById(id);e.className="feedback "+type;e.innerHTML=text}
+function unlock(id){
+  const e=document.getElementById(id);
+  e.classList.remove("locked");
+  e.querySelectorAll("button").forEach(b=>b.disabled=false);
+}
+function phaseDone(id){document.getElementById(id+"done").classList.remove("hidden")}
+
+document.getElementById("startBtn").addEventListener("click",()=>{
+  studentName=document.getElementById("studentName").value.trim()||"Aluno(a)";
+  show("p1");
+});
+
+document.querySelectorAll(".releaseBtn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.getElementById(btn.dataset.phase+"ex").classList.remove("hidden");
+    btn.disabled=true;
+    btn.textContent="✅ EXERCÍCIOS LIBERADOS";
+  });
+});
+
+document.addEventListener("click",e=>{
+  if(e.target.classList.contains("nextPhase"))show(e.target.dataset.target);
+});
+
+const flow={
+  p1q1:["p1e2",null],p1q2:["p1e3",null],p1q3:[null,"p1"],
+  p2q2:["p2e3",null],p2q3:[null,"p2"],
+  p3q1:["p3e2",null],p3q2:["p3e3",null],p3q3:[null,"p3"],
+  p4q1:["p4e2",null],p4q2:["p4e3",null],
+  p5q1:["p5e2",null],p5q2:["p5e3",null],p5q3:[null,"p5"],
+  p6q1:["p6e2",null],p6q2:["p6e3",null],p6q3:[null,"p6"]
+};
+
+document.querySelectorAll(".exercise.locked button").forEach(b=>b.disabled=true);
+
+document.querySelectorAll(".q").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const q=btn.dataset.q;
+    if(btn.dataset.ok!=="1"){fb(q+"f","bad","❌ Ainda não. Tente novamente.");return}
+    document.querySelectorAll(`[data-q="${q}"]`).forEach(b=>b.disabled=true);
+    addScore(q==="finalq"?10:5);
+
+    if(q==="finalq"){
+      fb(q+"f","ok","🏆 Perfeito! Você concluiu a missão.<div class='actions'><button class='primary' id='finishBtn'>VER RESULTADO FINAL</button></div>");
+      setTimeout(()=>{
+        document.getElementById("finishBtn").addEventListener("click",()=>{
+          document.getElementById("finalScore").textContent=score;
+          document.getElementById("finishName").textContent=studentName+", você concluiu sua primeira aula de lógica de programação!";
+          show("finish");
+        });
+      },0);
+      return;
+    }
+
+    const [unlockId,donePhase]=flow[q]||[];
+    if(unlockId){
+      unlock(unlockId);
+      fb(q+"f","ok","✅ Correto! Agora faça o próximo exercício.");
+    }else if(donePhase){
+      phaseDone(donePhase);
+      fb(q+"f","ok","✅ Muito bem! Você concluiu os três exercícios desta fase.");
+    }else{
+      fb(q+"f","ok","✅ Correto!");
+    }
+  });
+});
+
+/* FASE 2 EXERCÍCIO 1 */
+let seq1=[];
+const seqData=[
+  {id:3,t:"🌐 Abrir o navegador"},
+  {id:1,t:"🔘 Ligar o computador"},
+  {id:4,t:"🔎 Digitar o endereço"},
+  {id:2,t:"🔐 Entrar no sistema"}
+];
+function renderSeq(){
+  const box=document.getElementById("seqOptions1");box.innerHTML="";
+  seqData.forEach(item=>{
+    const b=document.createElement("button");
+    b.className="choice";b.textContent=item.t;
+    b.addEventListener("click",()=>{
+      if(b.disabled)return;
+      seq1.push(item.id);b.disabled=true;
+      document.getElementById("seqAnswer1").textContent=seq1.join(" → ");
+    });
+    box.appendChild(b);
+  });
+}
+renderSeq();
+
+document.getElementById("seqClear1").addEventListener("click",()=>{
+  seq1=[];
+  document.getElementById("seqAnswer1").textContent="Nenhum passo escolhido.";
+  renderSeq();
+  document.getElementById("p2q1f").innerHTML="";
+});
+document.getElementById("seqCheck1").addEventListener("click",()=>{
+  if(JSON.stringify(seq1)===JSON.stringify([1,2,3,4])){
+    addScore(5);
+    unlock("p2e2");
+    fb("p2q1f","ok","✅ Correto! Agora faça o exercício 2.");
+    document.getElementById("seqCheck1").disabled=true;
+    document.getElementById("seqClear1").disabled=true;
+  }else{
+    fb("p2q1f","bad","❌ A ordem ainda está incorreta.");
+  }
+});
+
+/* MATRIZES */
+function drawMatrix(id,r0,c0,symbol){
+  const g=document.getElementById(id);g.innerHTML="";
+  for(let r=1;r<=5;r++){
+    for(let c=1;c<=5;c++){
+      const cell=document.createElement("div");
+      cell.className="cell";
+      cell.innerHTML=`<span class="coord">L${r},C${c}</span>`;
+      if(r===r0&&c===c0){
+        cell.classList.add(symbol==="⭐"?"target":"robot");
+        cell.innerHTML+=symbol;
+      }
+      g.appendChild(cell);
+    }
+  }
+}
+drawMatrix("coordMatrix1",2,4,"⭐");
+drawMatrix("coordMatrix2",4,2,"🤖");
+
+/* ROBÔ */
+let robot={r:5,c:1},commands=[];
+const target={r:1,c:5},icons={U:"⬆️",D:"⬇️",L:"⬅️",R:"➡️"};
+function drawRobot(){
+  const g=document.getElementById("robotMatrix");g.innerHTML="";
+  for(let r=1;r<=5;r++){
+    for(let c=1;c<=5;c++){
+      const cell=document.createElement("div");
+      cell.className="cell";
+      cell.innerHTML=`<span class="coord">L${r},C${c}</span>`;
+      if(r===target.r&&c===target.c){cell.classList.add("target");cell.innerHTML+="⭐"}
+      if(r===robot.r&&c===robot.c){cell.classList.add("robot");cell.innerHTML+="🤖"}
+      g.appendChild(cell);
+    }
+  }
+}
+drawRobot();
+
+document.querySelectorAll(".move").forEach(b=>b.addEventListener("click",()=>{
+  if(commands.length>=16)return;
+  commands.push(b.dataset.move);
+  document.getElementById("robotCode").textContent=commands.map(x=>icons[x]).join(" ");
+}));
+document.getElementById("robotClear").addEventListener("click",()=>{
+  commands=[];robot={r:5,c:1};
+  document.getElementById("robotCode").textContent="Nenhum comando.";
+  drawRobot();
+  document.getElementById("p4q3f").innerHTML="";
+});
+document.getElementById("robotRun").addEventListener("click",()=>{
+  robot={r:5,c:1};
+  for(const c of commands){
+    if(c==="U"&&robot.r>1)robot.r--;
+    if(c==="D"&&robot.r<5)robot.r++;
+    if(c==="L"&&robot.c>1)robot.c--;
+    if(c==="R"&&robot.c<5)robot.c++;
+  }
+  drawRobot();
+  if(robot.r===1&&robot.c===5){
+    addScore(5);
+    document.querySelectorAll("#p4e3 button").forEach(b=>b.disabled=true);
+    fb("p4q3f","ok","🎉 Perfeito! Você concluiu os três exercícios desta fase.");
+    phaseDone("p4");
+  }else{
+    fb("p4q3f","bad",`🤖 O robô terminou em L${robot.r},C${robot.c}. Corrija os comandos.`);
+  }
+});
+
+document.getElementById("restartAll").addEventListener("click",()=>location.reload());
+</script>
+</body>
+</html>
