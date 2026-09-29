@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Missão Digital 2º Ano | Universitas</title><style>
+:root{--azul:#145da0;--azul2:#2f80ed;--verde:#20984f;--amarelo:#ffd84d;--vermelho:#d64545;--roxo:#7c3aed;--texto:#17324d}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(145deg,#edf6ff,#fff9e8);color:var(--texto)}
+header{background:linear-gradient(135deg,#0b4f91,#1475d1,#45a2f5);color:#fff;padding:18px 16px}.head{max-width:1150px;margin:auto;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(25px,5vw,42px)}header p{margin:4px 0 0;font-weight:800}.stats{display:flex;gap:8px;flex-wrap:wrap}.badge{background:#ffffff26;border:2px solid #ffffff42;border-radius:16px;padding:9px 12px;font-weight:900}
+.progressWrap{max-width:1150px;margin:12px auto 0;padding:0 16px}.progress{height:14px;background:#d7e8f7;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,#ffd84d,#22a447);width:0;transition:.25s}
+main{max-width:1150px;margin:20px auto;padding:0 16px 30px}.card{background:#fff;border:3px solid #d7e8f7;border-radius:26px;box-shadow:0 10px 28px #145da020;padding:22px}.center{text-align:center}
+.hero{font-size:76px}h2{font-size:clamp(27px,5vw,38px);margin:7px 0}.instrucao{font-size:clamp(19px,3vw,25px);font-weight:900;line-height:1.3;max-width:900px;margin:10px auto 16px}.sub{font-size:18px;line-height:1.45}
+button{border:0;border-radius:18px;cursor:pointer;font-weight:900;transition:.12s transform}.btn{padding:13px 19px;font-size:18px;color:#fff;background:var(--azul);box-shadow:0 5px 0 #0b467d}.btn.green{background:var(--verde);box-shadow:0 5px 0 #136c37}.btn.yellow{background:var(--amarelo);color:#4b3a00;box-shadow:0 5px 0 #c69a00}.btn.secondary{background:#fff;color:var(--azul);border:3px solid var(--azul);box-shadow:none}.listen{background:#eee8ff;color:#5b21b6;padding:9px 14px}
+.feedback{min-height:58px;max-width:820px;margin:14px auto;border-radius:18px;padding:13px 16px;font-size:20px;font-weight:900}.feedback.ok{background:#dcfce7;color:#166534}.feedback.no{background:#fee2e2;color:#991b1b}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}input{width:min(600px,95%);padding:14px 16px;border:3px solid #8fc7f5;border-radius:16px;font-size:21px}
+.choices{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;margin:16px 0}.choice{min-width:145px;min-height:105px;background:#fff;border:4px solid #badcf8;box-shadow:0 6px 0 #dcecf9;font-size:39px;padding:12px}.choice span{display:block;font-size:15px;color:#334155;margin-top:6px}
+.seqRow{display:flex;gap:9px;justify-content:center;align-items:center;flex-wrap:wrap;margin:15px 0}.seqItem{width:130px;height:108px;border:4px solid #c7d2fe;border-radius:18px;background:#fff;font-size:40px;display:flex;flex-direction:column;align-items:center;justify-content:center}.seqItem small{font-size:13px}
+.itemGrid{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.item{width:125px;height:95px;border:4px solid #d7e4ef;border-radius:18px;background:#fff;font-size:39px}.item.selected{border-color:#f59e0b;background:#fffbeb}
+.infoCard{max-width:830px;margin:16px auto;background:#eef7ff;border:3px solid #b9dcfb;border-radius:20px;padding:16px;font-size:19px;font-weight:800;line-height:1.4}
+.binary{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}.binBtn{min-width:210px;padding:17px;background:#fff;border:4px solid #badcf8;color:#173b70;font-size:20px}
+.board{display:grid;gap:6px;background:#173b70;padding:8px;border-radius:22px;width:min(92vw,470px);aspect-ratio:1;margin:0 auto}.cell{background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:clamp(25px,6vw,43px)}.cell.wall{background:#cbd5e1}
+.controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}.arrow{width:70px;height:60px;background:#fff;border:4px solid #8fc7f5;font-size:29px}.commands{min-height:60px;border:3px dashed #8fc7f5;border-radius:16px;padding:9px;max-width:780px;margin:13px auto;background:#f9fcff;font-size:27px}
+.codeBox{max-width:780px;margin:16px auto;background:#10253d;color:white;border-radius:18px;padding:16px;font-family:Consolas,monospace;font-size:19px;text-align:left;line-height:1.6}.wrong{background:#7f1d1d;padding:2px 5px;border-radius:6px}.good{background:#14532d;padding:2px 5px;border-radius:6px}
+.final{background:#fffbea;border:4px solid #f4cf4a;border-radius:23px;padding:20px}.cert{font-size:27px;font-weight:900;color:#0d4f9c}.report{overflow-x:auto;margin-top:18px}table{width:100%;border-collapse:collapse;font-size:13px}th,td{border:1px solid #cbd5e1;padding:7px;text-align:left}th{background:#145da0;color:#fff}
+.footer{text-align:center;color:#64748b;margin-top:14px;font-size:13px}
+.studentGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;max-width:980px;margin:18px auto}
+.student{padding:15px 12px;color:white;font-size:17px;min-height:66px;border:4px solid transparent}
+.student.selected{border-color:#111827;box-shadow:0 0 0 4px #fff inset}
+.nameBox{max-width:620px;margin:18px auto;display:grid;gap:10px;text-align:left}
+.nameBox label{font-size:18px;font-weight:900}
+
+@media(max-width:650px){.card{padding:16px 11px}.choice{min-width:115px;min-height:95px;font-size:34px}.seqItem{width:100px;height:95px;font-size:34px}.item{width:100px;height:85px}}
+@media print{header,.progressWrap,.noPrint,.footer{display:none!important}.card{border:none;box-shadow:none}body{background:#fff}}
+</style></head><body>
+<header><div class="head"><div><h1>🤖 Missão Programador Júnior</h1><p>Universitas • 2º Ano • Educação Digital e Computação • 45 minutos</p></div><div class="stats"><div class="badge">🏁 Fase <span id="faseNum">1</span>/28</div><div class="badge">⭐ <span id="stars">0</span></div><div class="badge">❌ <span id="errors">0</span></div></div></div></header>
+<div class="progressWrap"><div class="progress"><div id="progressBar"></div></div></div><main><section class="card center" id="app"></section><div class="footer">Pensamento Computacional • Mundo Digital • Cultura Digital</div></main>
+<script>const phases=[{"t": "inicio", "title": "Identificação", "say": "Digite seu nome para iniciar a missão."}, {"t": "pattern1", "title": "Padrão com repetição", "say": "Descubra a regra do padrão."}, {"t": "pattern2", "title": "Padrão numérico", "say": "Descubra qual número vem depois."}, {"t": "seq1", "title": "Algoritmo do cotidiano", "say": "Organize os passos em uma sequência lógica."}, {"t": "seq2", "title": "Algoritmo para pesquisar", "say": "Organize os passos para fazer uma pesquisa simples."}, {"t": "repeat1", "title": "Comando repetido", "say": "Descubra como encurtar uma sequência repetida."}, {"t": "repeat2", "title": "Repita quatro vezes", "say": "Escolha a forma mais curta de escrever os comandos."}, {"t": "hardware", "title": "Hardware", "say": "Identifique as partes físicas do computador."}, {"t": "software", "title": "Software", "say": "Identifique programas e aplicativos."}, {"t": "input", "title": "Entrada de dados", "say": "Selecione dispositivos que enviam informações ao computador."}, {"t": "output", "title": "Saída de dados", "say": "Selecione dispositivos que mostram ou reproduzem resultados."}, {"t": "logic1", "title": "Verdadeiro ou falso", "say": "Analise uma afirmação sobre computadores."}, {"t": "logic2", "title": "Comando e resultado", "say": "Descubra o resultado de um comando."}, {"t": "robot1", "title": "Programação 1", "say": "Leve o robô até o destino."}, {"t": "robot2", "title": "Programação 2", "say": "Desvie dos obstáculos."}, {"t": "robot3", "title": "Programação 3", "say": "Colete uma estrela antes de chegar."}, {"t": "robot4", "title": "Programação 4", "say": "Colete duas estrelas."}, {"t": "debug1", "title": "Caça ao erro", "say": "Encontre o comando incorreto."}, {"t": "debug2", "title": "Corrija o programa", "say": "Escolha o comando que corrige o algoritmo."}, {"t": "storage", "title": "Arquivos e pastas", "say": "Escolha onde guardar um arquivo."}, {"t": "security1", "title": "Senha segura", "say": "Identifique uma senha mais segura."}, {"t": "security2", "title": "Links desconhecidos", "say": "Escolha a atitude mais segura."}, {"t": "care", "title": "Cuidado com equipamentos", "say": "Escolha uma boa atitude de uso."}, {"t": "network", "title": "Internet e comunicação", "say": "Entenda para que serve uma rede."}, {"t": "challenge1", "title": "Desafio misto 1", "say": "Resolva um desafio de lógica."}, {"t": "challenge2", "title": "Desafio misto 2", "say": "Resolva um desafio de mundo digital."}, {"t": "super", "title": "Superdesafio", "say": "Resolva seis questões finais."}, {"t": "final", "title": "Missão concluída", "say": "Veja seu resultado."}];
+
+const students=[
+ {full:'ISABELA PAVELSKI FERNANDES',first:'ISABELA',color:'#e84393'},
+ {full:'JOÃO LUCAS GALDINO BRAZ',first:'JOÃO LUCAS',color:'#8e44ad'},
+ {full:'LIZ LOURENÇO ROSOLEM',first:'LIZ',color:'#2f80ed'},
+ {full:'MIGUEL ZAFFANI ROSA',first:'MIGUEL',color:'#e67e22'},
+ {full:'PIETRA ITO BIANCONI',first:'PIETRA',color:'#27ae60'},
+ {full:'RAYSSA FERREIRA AUGUSTO',first:'RAYSSA',color:'#c0392b'},
+ {full:'THALITA DE MATOS NOGUEIRA',first:'THALITA',color:'#16a085'}
+];
+let phase=0,stars=0,errors=0,name='',student=null,locked=false,seq=[],selected=new Set(),robot=null,phaseErrors=0,phaseStart=Date.now(),log=[],superStep=0;
+const app=document.getElementById('app');
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function norm(s){return(s||'').trim().toUpperCase().replace(/\s+/g,' ')}
+function speak(t){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='pt-BR';u.rate=.92;speechSynthesis.speak(u)}
+function stats(){document.getElementById('faseNum').textContent=phase+1;document.getElementById('stars').textContent=stars;document.getElementById('errors').textContent=errors;document.getElementById('progressBar').style.width=(phase/(phases.length-1)*100)+'%'}
+function fb(msg,ok){const e=document.getElementById('feedback');if(!e)return;e.className='feedback '+(ok?'ok':'no');e.innerHTML=msg;speak(msg.replace(/<[^>]*>/g,''))}
+function fail(msg='Tente novamente.'){errors++;phaseErrors++;stats();fb('💡 '+msg,false)}
+function savePhase(){if(phase===0||phase>=phases.length-1)return;log.push({fase:phase+1,titulo:phases[phase].title,erros:phaseErrors,tempo:Math.round((Date.now()-phaseStart)/1000)})}
+function complete(msg='Muito bem!'){if(locked)return;locked=true;stars++;stats();fb('⭐ '+msg,true);setTimeout(()=>{savePhase();phase++;phaseErrors=0;phaseStart=Date.now();locked=false;render()},800)}
+function base(p){return `<div class="hero">${p.t==='final'?'🏆':'🧠'}</div><h2>${p.title}</h2><div class="instrucao">${p.say}</div><button class="listen noPrint" onclick="speak('${p.say.replace(/'/g,"\\'")}')">🔊 Ouvir instrução</button>`}
+function startHTML(){
+ return `<div class="infoCard">1. Clique no seu nome na lista.<br>2. Depois, escreva o mesmo primeiro nome para confirmar.</div>
+ <div class="studentGrid">${students.map((s,i)=>`<button class="student" style="background:${s.color}" onclick="chooseStudent(${i},this)">${s.first}</button>`).join('')}</div>
+ <div class="nameBox">
+   <label>Agora escreva seu primeiro nome:</label>
+   <input id="nameInput" placeholder="DIGITE SEU NOME" autocomplete="off">
+   <button class="btn green" onclick="startGame()">🚀 COMEÇAR MISSÃO</button>
+ </div>
+ <div id="feedback" class="feedback"></div>`}
+function chooseStudent(i,el){
+ student=students[i];
+ document.querySelectorAll('.student').forEach(x=>x.classList.remove('selected'));
+ el.classList.add('selected');
+ speak('Nome escolhido: '+student.first);
+}
+function startGame(){
+ if(!student){fail('Primeiro clique no seu nome na lista.');return}
+ const v=norm(document.getElementById('nameInput').value);
+ if(v!==norm(student.first) && v!==norm(student.full)){fail('Digite o mesmo nome que você escolheu.');return}
+ name=student.full;
+ stars=0;errors=0;phase=1;phaseErrors=0;phaseStart=Date.now();render();
+}
+function patternHTML(text,opts,correct,msg){return `<div class="infoCard" style="font-size:30px">${text}</div><div class="choices">${shuffle(opts).map(o=>`<button class="choice" onclick="${o===correct?`complete('${msg.replace(/'/g,"\\'")}')`:`fail('Observe o padrão com atenção.')`}">${o}</button>`).join('')}</div><div id="feedback" class="feedback"></div>`}
+function seqUI(items,correct,msg){seq=[];window.seqCorrect=correct;window.seqMsg=msg;const s=shuffle(items);return `<div class="seqRow" id="chosenSeq"><span class="sub">Clique na ordem correta:</span></div><div class="choices">${s.map(x=>`<button class="seqItem" id="q-${x[0]}" onclick="addSeq('${x[0]}','${x[1]}')">${x[1]}<small>${x[2]}</small></button>`).join('')}</div><div class="actions noPrint"><button class="btn yellow" onclick="checkSeq()">✅ CONFERIR</button><button class="btn secondary" onclick="render()">🧹 LIMPAR</button></div><div id="feedback" class="feedback"></div>`}
+function addSeq(id,emoji){if(seq.includes(id))return;seq.push(id);document.getElementById('q-'+id).disabled=true;document.getElementById('chosenSeq').insertAdjacentHTML('beforeend',`<div class="seqItem">${emoji}<small>${seq.length}</small></div>`)}
+function checkSeq(){if(seq.length!==window.seqCorrect.length){fail('Escolha todos os passos.');return}if(seq.every((x,i)=>x===window.seqCorrect[i]))complete(window.seqMsg);else fail('A ordem ainda não está correta.')}
+function classUI(items,correct,msg){selected=new Set();window.classCorrect=correct;window.classMsg=msg;return `<div class="itemGrid">${shuffle(items).map(x=>`<button class="item" id="it-${x[0]}" onclick="toggle('${x[0]}')">${x[1]}</button>`).join('')}</div><div class="actions noPrint"><button class="btn yellow" onclick="checkClass()">✅ CONFERIR</button></div><div id="feedback" class="feedback"></div>`}
+function toggle(id){const e=document.getElementById('it-'+id);if(selected.has(id)){selected.delete(id);e.classList.remove('selected')}else{selected.add(id);e.classList.add('selected')}}
+function checkClass(){const c=window.classCorrect;if(selected.size===c.length&&c.every(x=>selected.has(x)))complete(window.classMsg);else fail('Revise suas escolhas.')}
+function mcq(question,opts,correct,msg){return `<div class="infoCard">${question}</div><div class="choices">${shuffle(opts).map(o=>`<button class="choice" onclick="${o===correct?`complete('${msg.replace(/'/g,"\\'")}')`:`fail('Essa opção não resolve o desafio.')`}"><span>${o}</span></button>`).join('')}</div><div id="feedback" class="feedback"></div>`}
+function robotHTML(){return `<div class="board" id="board"></div><div class="controls noPrint"><button class="arrow" onclick="addCmd('up')">⬆️</button><button class="arrow" onclick="addCmd('down')">⬇️</button><button class="arrow" onclick="addCmd('left')">⬅️</button><button class="arrow" onclick="addCmd('right')">➡️</button></div><div class="commands" id="cmds">Monte seus comandos aqui.</div><div class="actions noPrint"><button class="btn green" onclick="runRobot()">▶ EXECUTAR</button><button class="btn secondary" onclick="clearRobot()">🧹 LIMPAR</button></div><div id="feedback" class="feedback"></div>`}
+function setupRobot(cfg){robot={...cfg,pos:{...cfg.start},cmds:[],collected:[],running:false};const b=document.getElementById('board');b.style.gridTemplateColumns=`repeat(${cfg.cols},1fr)`;let h='';for(let r=0;r<cfg.rows;r++)for(let c=0;c<cfg.cols;c++)h+=`<div class="cell" data-r="${r}" data-c="${c}"></div>`;b.innerHTML=h;paintRobot()}
+function paintRobot(){document.querySelectorAll('.cell').forEach(e=>{const r=+e.dataset.r,c=+e.dataset.c;const wall=robot.walls.some(w=>w.r===r&&w.c===c),ri=robot.pos.r===r&&robot.pos.c===c,gi=robot.goal.r===r&&robot.goal.c===c,si=robot.stars.findIndex(s=>s.r===r&&s.c===c),col=si>=0&&robot.collected.includes(si);e.classList.toggle('wall',wall);e.textContent=wall?'🪨':ri?'🤖':(si>=0&&!col)?'⭐':gi?'🏁':''})}
+function addCmd(c){if(robot.running||robot.cmds.length>=24)return;robot.cmds.push(c);refreshCmds()}
+function refreshCmds(){const m={up:'⬆️',down:'⬇️',left:'⬅️',right:'➡️'};document.getElementById('cmds').innerHTML=robot.cmds.length?robot.cmds.map(x=>m[x]).join(' '):'Monte seus comandos aqui.'}
+function clearRobot(){if(robot.running)return;robot.cmds=[];robot.pos={...robot.start};robot.collected=[];refreshCmds();paintRobot()}
+async function runRobot(){if(robot.running)return;if(!robot.cmds.length){fail('Escolha alguns comandos.');return}robot.running=true;robot.pos={...robot.start};robot.collected=[];paintRobot();for(const c of robot.cmds){await new Promise(r=>setTimeout(r,280));let p={...robot.pos};if(c==='up')p.r--;if(c==='down')p.r++;if(c==='left')p.c--;if(c==='right')p.c++;const out=p.r<0||p.c<0||p.r>=robot.rows||p.c>=robot.cols,wall=robot.walls.some(w=>w.r===p.r&&w.c===p.c);if(out||wall){robot.running=false;fail(wall?'O robô bateu no obstáculo.':'O robô saiu do tabuleiro.');return}robot.pos=p;robot.stars.forEach((s,i)=>{if(s.r===p.r&&s.c===p.c&&!robot.collected.includes(i))robot.collected.push(i)});paintRobot()}robot.running=false;const goal=robot.pos.r===robot.goal.r&&robot.pos.c===robot.goal.c,all=robot.collected.length===robot.stars.length;if(goal&&all)complete('Algoritmo executado com sucesso!');else if(!all)fail('Ainda falta coletar uma estrela.');else fail('O robô ainda não chegou ao final.')}
+function finalHTML(label,summary){document.getElementById('progressBar').style.width='100%';const total=log.reduce((a,b)=>a+b.tempo,0);return `<div class="final"><div class="cert">🏆 ${label} 🏆</div><h2>${name}</h2><p class="instrucao">${summary}</p><p class="sub"><b>Estrelas:</b> ⭐ ${stars} &nbsp; <b>Erros:</b> ${errors} &nbsp; <b>Tempo registrado:</b> ${Math.max(1,Math.round(total/60))} min</p></div><div class="actions noPrint"><button class="btn green" onclick="window.print()">🖨️ IMPRIMIR RELATÓRIO</button><button class="btn secondary" onclick="location.reload()">🔁 NOVA ATIVIDADE</button></div><div class="report"><h3>Relatório por fase</h3><table><thead><tr><th>Fase</th><th>Desafio</th><th>Tempo</th><th>Erros</th></tr></thead><tbody>${log.map(x=>`<tr><td>${x.fase}</td><td>${x.titulo}</td><td>${x.tempo}s</td><td>${x.erros}</td></tr>`).join('')}</tbody></table></div>`}
+
+function render(){stats();const p=phases[phase];let h=base(p);
+if(p.t==='inicio')h+=startHTML();
+if(p.t==='pattern1')h+=patternHTML('🔵 🟡 🔵 🟡 🔵 ❓',['🔵','🟡','🟢'],'🟡','Você identificou a repetição!');
+if(p.t==='pattern2')h+=patternHTML('2 • 4 • 6 • 8 • ❓',['9','10','12'],'10','A sequência aumenta de 2 em 2!');
+if(p.t==='seq1')h+=seqUI([['wake','⏰','ACORDAR'],['dress','👕','SE VESTIR'],['bag','🎒','PEGAR A MOCHILA'],['school','🏫','IR À ESCOLA']],['wake','dress','bag','school'],'Sequência correta!');
+if(p.t==='seq2')h+=seqUI([['open','🌐','ABRIR NAVEGADOR'],['type','⌨️','DIGITAR O TEMA'],['read','👀','LER RESULTADOS'],['choose','✅','ESCOLHER FONTE']],['open','type','read','choose'],'Você montou um algoritmo de pesquisa!');
+if(p.t==='repeat1')h+=mcq('➡️ ➡️ ➡️ ➡️ pode ser escrito de forma mais curta como:',['REPITA 4 VEZES ➡️','REPITA 2 VEZES ⬅️','PARE'],'REPITA 4 VEZES ➡️','Muito bem! Isso é repetição.');
+if(p.t==='repeat2')h+=mcq('Qual comando representa ⬆️ ⬆️ ⬆️ ⬆️ ?',['REPITA 4 VEZES ⬆️','REPITA 3 VEZES ⬆️','REPITA 4 VEZES ⬇️'],'REPITA 4 VEZES ⬆️','Você compactou uma sequência repetida!');
+if(p.t==='hardware')h+=classUI([['m','🖱️'],['k','⌨️'],['mon','🖥️'],['game','🎮 JOGO'],['browser','🌐 NAVEGADOR'],['editor','📝 EDITOR']],['m','k','mon'],'Hardware é a parte física.');
+if(p.t==='software')h+=classUI([['m','🖱️'],['k','⌨️'],['game','🎮 JOGO'],['browser','🌐 NAVEGADOR'],['editor','📝 EDITOR'],['printer','🖨️']],['game','browser','editor'],'Software são programas e aplicativos.');
+if(p.t==='input')h+=classUI([['k','⌨️'],['m','🖱️'],['mic','🎤'],['mon','🖥️'],['sp','🔊'],['pr','🖨️']],['k','m','mic'],'Esses dispositivos enviam dados ao computador.');
+if(p.t==='output')h+=classUI([['mon','🖥️'],['sp','🔊'],['pr','🖨️'],['k','⌨️'],['m','🖱️'],['mic','🎤']],['mon','sp','pr'],'Esses dispositivos apresentam resultados.');
+if(p.t==='logic1')h+=mcq('“Um programa é uma sequência de instruções que o computador pode executar.”',['VERDADEIRO','FALSO'],'VERDADEIRO','Correto!');
+if(p.t==='logic2')h+=mcq('Se o comando é “REPITA 3 VEZES ➡️”, quantos passos o robô dará?',['2','3','4'],'3','Isso mesmo!');
+if(p.t.startsWith('robot'))h+=robotHTML();
+if(p.t==='debug1')h+=mcq('O robô deveria ir sempre para a direita: ➡️ ➡️ ⬅️ ➡️. Qual comando está errado?',['1º ➡️','2º ➡️','3º ⬅️','4º ➡️'],'3º ⬅️','Você localizou o erro!');
+if(p.t==='debug2')h+=mcq('Complete: ➡️ ➡️ ❓ ➡️ para continuar sempre à direita.',['➡️','⬅️','⬆️'],'➡️','Programa corrigido!');
+if(p.t==='storage')h+=mcq('Você terminou um desenho digital. O que deve fazer para encontrá-lo depois?',['SALVAR EM UMA PASTA','FECHAR SEM SALVAR','DESLIGAR O MONITOR'],'SALVAR EM UMA PASTA','Arquivos organizados podem ser encontrados depois.');
+if(p.t==='security1')h+=mcq('Qual senha é mais segura?',['123456','MARIA','Sol!27Casa'],'Sol!27Casa','Uma senha mais longa e variada tende a ser mais segura.');
+if(p.t==='security2')h+=mcq('Um desconhecido envia um link dizendo “clique agora”. O que fazer?',['CLICAR RAPIDAMENTE','PEDIR AJUDA A UM ADULTO','ENVIAR SUA SENHA'],'PEDIR AJUDA A UM ADULTO','Boa decisão de segurança.');
+if(p.t==='care')h+=mcq('Qual atitude ajuda a cuidar do computador?',['COMER SOBRE O TECLADO','USAR COM CUIDADO E MÃOS LIMPAS','PUXAR OS CABOS'],'USAR COM CUIDADO E MÃOS LIMPAS','Cuidado com equipamentos é cidadania digital.');
+if(p.t==='network')h+=mcq('Uma rede de computadores permite principalmente:',['COMPUTADORES TROCAREM DADOS','O TECLADO FICAR MAIOR','A TELA VIRAR IMPRESSORA'],'COMPUTADORES TROCAREM DADOS','Isso é comunicação em rede.');
+if(p.t==='challenge1')h+=mcq('Qual sequência tem repetição?',['➡️ ➡️ ➡️ ➡️','➡️ ⬆️ ⬅️ ⬇️','⭐ 🟥 🔺 🟢'],'➡️ ➡️ ➡️ ➡️','Você reconheceu uma repetição.');
+if(p.t==='challenge2')h+=mcq('Qual alternativa contém apenas hardware?',['TECLADO, MOUSE, MONITOR','NAVEGADOR, JOGO, EDITOR','MOUSE, JOGO, NAVEGADOR'],'TECLADO, MOUSE, MONITOR','Classificação correta!');
+if(p.t==='super')h+=superHTML2();
+if(p.t==='final')h+=finalHTML('PROGRAMADOR JÚNIOR — NÍVEL 2','Você trabalhou algoritmos, repetição, hardware, software, entrada e saída, depuração, redes e segurança digital.');
+app.innerHTML=h;
+if(p.t==='robot1')setupRobot({rows:4,cols:4,start:{r:0,c:0},goal:{r:3,c:3},walls:[],stars:[]});
+if(p.t==='robot2')setupRobot({rows:5,cols:5,start:{r:4,c:0},goal:{r:0,c:4},walls:[{r:3,c:1},{r:2,c:1},{r:1,c:3}],stars:[]});
+if(p.t==='robot3')setupRobot({rows:5,cols:5,start:{r:4,c:0},goal:{r:0,c:4},walls:[{r:3,c:1},{r:2,c:1}],stars:[{r:4,c:3}]});
+if(p.t==='robot4')setupRobot({rows:5,cols:5,start:{r:4,c:0},goal:{r:0,c:4},walls:[{r:3,c:1},{r:2,c:1},{r:2,c:3}],stars:[{r:4,c:3},{r:1,c:4}]});
+}
+function superHTML2(){superStep=0;return `<div id="superArea">${superQ2()}</div><div id="feedback" class="feedback"></div>`}
+function superQ2(){
+const qs=[
+['Qual é hardware?',['🖱️ MOUSE','🌐 NAVEGADOR'],'🖱️ MOUSE'],
+['Qual é software?',['📝 EDITOR','⌨️ TECLADO'],'📝 EDITOR'],
+['REPITA 5 VEZES ➡️ significa quantos passos?',['4','5','6'],'5'],
+['Qual é dispositivo de entrada?',['🎤 MICROFONE','🔊 CAIXA DE SOM'],'🎤 MICROFONE'],
+['Qual atitude é segura?',['COMPARTILHAR SENHA','PEDIR AJUDA DIANTE DE LINK SUSPEITO'],'PEDIR AJUDA DIANTE DE LINK SUSPEITO'],
+['Uma rede serve para:',['TROCAR DADOS','APAGAR O TECLADO'],'TROCAR DADOS']
+];const q=qs[superStep];return `<div class="infoCard">${superStep+1}. ${q[0]}</div><div class="choices">${shuffle(q[1]).map(o=>`<button class="choice" onclick="superAns2(${JSON.stringify(o===q[2])})"><span>${o}</span></button>`).join('')}</div>`}
+function superAns2(ok){if(!ok){errors++;phaseErrors++;stats();fb('💡 Tente novamente.',false);return}stars++;stats();superStep++;if(superStep<6){fb('⭐ Certo!',true);setTimeout(()=>{document.getElementById('superArea').innerHTML=superQ2();document.getElementById('feedback').className='feedback';document.getElementById('feedback').innerHTML=''},500)}else{fb('⭐ Superdesafio concluído!',true);setTimeout(()=>{savePhase();phase++;phaseErrors=0;phaseStart=Date.now();render()},800)}}
+render();</script></body></html>
