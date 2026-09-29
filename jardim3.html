@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missão Robô - Jardim 3 | Universitas</title>
+<style>
+:root{
+  --azul:#2563eb; --azul2:#60a5fa; --amarelo:#facc15; --verde:#22c55e;
+  --vermelho:#ef4444; --roxo:#8b5cf6; --fundo:#eef6ff; --texto:#17324d;
+  --card:#ffffff; --sombra:0 10px 30px rgba(37,99,235,.15);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--texto);min-height:100vh;
+  background:
+    radial-gradient(circle at top left,#dbeafe 0,transparent 35%),
+    radial-gradient(circle at bottom right,#fef3c7 0,transparent 30%),
+    var(--fundo);
+}
+header{
+  background:linear-gradient(135deg,#1d4ed8,#2563eb,#60a5fa);
+  color:#fff;padding:18px 16px;box-shadow:var(--sombra)
+}
+.topbar{
+  max-width:1100px;margin:auto;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;flex-wrap:wrap
+}
+.brand h1{margin:0;font-size:clamp(24px,5vw,42px)}
+.brand p{margin:4px 0 0;font-weight:700}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.badge{
+  background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.28);
+  border-radius:18px;padding:9px 13px;font-weight:800
+}
+.progress-wrap{max-width:1100px;margin:12px auto 0;padding:0 16px}
+.progress{height:14px;background:#dbeafe;border-radius:20px;overflow:hidden}
+.progress>div{height:100%;width:0;background:linear-gradient(90deg,#facc15,#22c55e);transition:.3s}
+main{max-width:1100px;margin:20px auto;padding:0 16px 30px}
+.card{
+  background:#fff;border-radius:28px;padding:24px;box-shadow:var(--sombra);
+  border:3px solid #dbeafe
+}
+.center{text-align:center}
+h2{font-size:clamp(27px,5vw,40px);margin:6px 0 8px}
+.instrucao{
+  font-size:clamp(20px,3vw,27px);font-weight:800;line-height:1.25;
+  max-width:850px;margin:10px auto 18px
+}
+.sub{font-size:18px;line-height:1.45}
+button{
+  border:0;cursor:pointer;font-weight:800;border-radius:20px;
+  transition:.15s transform,.15s opacity
+}
+button:hover{transform:translateY(-2px)}
+button:disabled{opacity:.45;cursor:default;transform:none}
+.btn{
+  padding:14px 20px;font-size:19px;background:var(--azul);color:#fff;
+  box-shadow:0 6px 0 #1e40af
+}
+.btn.green{background:var(--verde);box-shadow:0 6px 0 #15803d}
+.btn.yellow{background:var(--amarelo);color:#4b3a00;box-shadow:0 6px 0 #ca8a04}
+.btn.secondary{background:#fff;color:var(--azul);border:3px solid var(--azul);box-shadow:none}
+.listen{background:#ede9fe;color:#5b21b6;padding:10px 15px;font-size:17px}
+.hero{font-size:88px;filter:drop-shadow(0 7px 0 rgba(37,99,235,.1))}
+.feedback{
+  min-height:60px;max-width:760px;margin:15px auto 4px;padding:13px 18px;
+  border-radius:18px;font-size:21px;font-weight:800
+}
+.feedback.ok{background:#dcfce7;color:#166534}
+.feedback.no{background:#fee2e2;color:#991b1b}
+.actions{display:flex;justify-content:center;gap:11px;flex-wrap:wrap;margin-top:18px}
+.name-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;max-width:900px;margin:18px auto
+}
+.name-btn{
+  padding:15px 13px;background:#fff;border:4px solid #bfdbfe;
+  color:#1e3a8a;font-size:16px;line-height:1.2;min-height:78px
+}
+.name-btn.selected{border-color:#f59e0b;background:#fffbeb}
+.namebox{max-width:600px;margin:20px auto;display:grid;gap:12px;text-align:left}
+label{font-size:19px;font-weight:800}
+input{
+  width:100%;font-size:22px;padding:14px 16px;border:3px solid #93c5fd;
+  border-radius:17px;outline:none
+}
+.pattern{font-size:clamp(42px,8vw,72px);letter-spacing:8px;margin:20px 0}
+.choices{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:18px 0}
+.big-choice{
+  min-width:145px;min-height:115px;padding:13px;background:#fff;
+  border:4px solid #bfdbfe;box-shadow:0 7px 0 #dbeafe;font-size:48px
+}
+.big-choice span{display:block;font-size:16px;margin-top:6px;color:#334155}
+.seq-row{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin:18px 0}
+.seq-item{
+  width:120px;height:120px;border:4px solid #c7d2fe;border-radius:22px;background:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:48px
+}
+.seq-item small{font-size:14px;margin-top:6px}
+.item-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.item{
+  width:120px;height:100px;border:4px solid #e2e8f0;border-radius:20px;
+  background:#fff;font-size:46px
+}
+.item.selected{border-color:#f59e0b;background:#fffbeb}
+.match-area{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+.match-col{display:grid;gap:10px;min-width:260px}
+.match-btn{
+  background:#fff;border:4px solid #bfdbfe;padding:13px;font-size:19px;color:#1e3a8a
+}
+.match-btn.active{border-color:#f59e0b;background:#fffbeb}
+.board{
+  display:grid;gap:6px;background:#1e3a8a;padding:8px;border-radius:22px;
+  width:min(92vw,440px);aspect-ratio:1/1;margin:0 auto
+}
+.cell{
+  background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-size:clamp(28px,7vw,48px)
+}
+.cell.wall{background:#cbd5e1}
+.controls{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:15px}
+.arrow{width:74px;height:64px;background:#fff;border:4px solid #93c5fd;font-size:32px}
+.command-list{
+  min-height:62px;border:3px dashed #93c5fd;border-radius:18px;padding:10px;
+  display:flex;gap:7px;flex-wrap:wrap;justify-content:center;align-items:center;
+  max-width:720px;margin:14px auto;background:#f8fbff;font-size:29px
+}
+.mini-note{font-size:15px;font-weight:700;color:#475569}
+.binary-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:18px 0}
+.binary{
+  min-width:200px;padding:18px;font-size:22px;background:#fff;border:4px solid #bfdbfe;color:#1e3a8a
+}
+.final-box{padding:20px;border:4px solid #fde68a;background:#fffbeb;border-radius:28px}
+.cert{font-size:27px;font-weight:900;color:#1d4ed8}
+.footer{text-align:center;margin-top:15px;color:#64748b;font-size:14px}
+@media(max-width:600px){
+  .card{padding:18px 13px}
+  .seq-item{width:100px;height:100px;font-size:40px}
+  .big-choice{min-width:118px;min-height:100px;font-size:42px}
+  .item{width:100px;height:88px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <h1>🤖 Missão Robô</h1>
+      <p>Universitas • Jardim 3 • Educação Digital</p>
+    </div>
+    <div class="stats">
+      <div class="badge">🏁 Fase <span id="faseNum">1</span>/15</div>
+      <div class="badge">⭐ <span id="stars">0</span></div>
+      <div class="badge">❌ <span id="errors">0</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="progress-wrap"><div class="progress"><div id="progressBar"></div></div></div>
+
+<main>
+  <section class="card center" id="app"></section>
+  <div class="footer">Pensamento Computacional • padrões • sequência • classificação • comandos • repetição • lógica</div>
+</main>
+
+<script>
+const alunos = [
+  "DERICK FELIPE SOARES TEIXEIRA",
+  "HELENA BEATRIZ PEDROSO DE LIMA",
+  "ISADORA CRISTINA TORIGOI DE ASSIS",
+  "JOAQUIM DAMASCENO DE MORAES",
+  "MARIA CLARA MENDES DELA COLETA",
+  "MARIA HELENA MATOS STELA",
+  "PEDRO COSTA SILVA"
+];
+
+const fases = [
+ {tipo:"inicio",titulo:"Escolha seu nome",fala:"Primeiro encontre seu nome. Depois copie o nome no teclado para entrar na missão."},
+ {tipo:"padrao1",titulo:"Padrão de cores",fala:"Descubra qual figura continua o padrão."},
+ {tipo:"padrao2",titulo:"Padrão de formas",fala:"Observe as formas e escolha a próxima."},
+ {tipo:"seq1",titulo:"A ordem do dia",fala:"Coloque as ações na ordem certa."},
+ {tipo:"seq2",titulo:"Preparando o computador",fala:"Qual é uma boa ordem para começar a usar o computador?"},
+ {tipo:"class1",titulo:"Tecnologia ou não?",fala:"Clique somente nos objetos de tecnologia digital."},
+ {tipo:"class2",titulo:"Usamos para controlar",fala:"Escolha os objetos usados para dar comandos ao computador."},
+ {tipo:"rep1",titulo:"Repita o modelo",fala:"Encontre a sequência igual ao modelo."},
+ {tipo:"rep2",titulo:"O que se repete?",fala:"Descubra o pedacinho que está se repetindo."},
+ {tipo:"log1",titulo:"Sim ou não?",fala:"Observe a frase e escolha sim ou não."},
+ {tipo:"robo1",titulo:"Primeiro caminho",fala:"Use as setas para levar o robô até a estrela."},
+ {tipo:"robo2",titulo:"Caminho com pedra",fala:"Agora existe uma pedra. Encontre outro caminho."},
+ {tipo:"robo3",titulo:"Duas estrelas",fala:"Passe pelas duas estrelas antes de terminar a missão."},
+ {tipo:"desafio",titulo:"Superdesafio",fala:"Use tudo o que aprendeu para responder três desafios rápidos."},
+ {tipo:"final",titulo:"Missão cumprida!",fala:"Parabéns! Você completou a Missão Robô."}
+];
+
+let fase=0, estrelas=0, erros=0, nomeSelecionado="", nome="";
+let locked=false, seqAtual=[], selected=new Set(), robot=null, superStep=0;
+
+const app=document.getElementById("app");
+
+function speak(text){
+ if(!("speechSynthesis" in window)) return;
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);u.lang="pt-BR";u.rate=.88;u.pitch=1.05;
+ speechSynthesis.speak(u);
+}
+function stats(){
+ document.getElementById("faseNum").textContent=Math.max(1,fase+1);
+ document.getElementById("stars").textContent=estrelas;
+ document.getElementById("errors").textContent=erros;
+ document.getElementById("progressBar").style.width=(fase/(fases.length-1)*100)+"%";
+}
+function feedback(msg,ok){
+ const el=document.getElementById("feedback"); if(!el)return;
+ el.className="feedback "+(ok?"ok":"no"); el.innerHTML=msg;
+ speak(msg.replace(/<[^>]*>/g,""));
+}
+function erro(msg="Quase! Tente novamente."){
+ erros++;stats();feedback("💡 "+msg,false);
+}
+function acerto(msg="Muito bem!"){
+ if(locked)return; locked=true; estrelas++;stats();feedback("⭐ "+msg,true);
+ setTimeout(()=>{fase++;locked=false;render()},1100);
+}
+function base(f){
+ return `<div class="hero">${f.tipo==="final"?"🏆":"🤖"}</div>
+ <h2>${f.titulo}</h2><div class="instrucao">${f.fala}</div>
+ <button class="listen" onclick="speak('${f.fala.replace(/'/g,"\\'")}')">🔊 Ouvir instrução</button>`;
+}
+function render(){
+ stats(); const f=fases[fase]; let h=base(f);
+ if(f.tipo==="inicio")h+=inicio();
+ if(f.tipo==="padrao1")h+=padrao1();
+ if(f.tipo==="padrao2")h+=padrao2();
+ if(f.tipo==="seq1")h+=seq1();
+ if(f.tipo==="seq2")h+=seq2();
+ if(f.tipo==="class1")h+=class1();
+ if(f.tipo==="class2")h+=class2();
+ if(f.tipo==="rep1")h+=rep1();
+ if(f.tipo==="rep2")h+=rep2();
+ if(f.tipo==="log1")h+=log1();
+ if(f.tipo==="robo1")h+=roboHTML(4,4,{r:0,c:0},{r:3,c:3},[]);
+ if(f.tipo==="robo2")h+=roboHTML(4,4,{r:3,c:0},{r:0,c:3},[{r:2,c:1},{r:1,c:1}]);
+ if(f.tipo==="robo3")h+=roboHTML(5,5,{r:4,c:0},{r:0,c:4},[{r:3,c:1},{r:2,c:1},{r:2,c:3}], [{r:4,c:3},{r:1,c:4}]);
+ if(f.tipo==="desafio")h+=superDesafio();
+ if(f.tipo==="final")h+=finale();
+ app.innerHTML=h;
+ if(["robo1","robo2","robo3"].includes(f.tipo)) setupRobot(f.tipo);
+}
+function inicio(){
+ return `<p class="sub"><b>1. Clique no seu nome:</b></p>
+ <div class="name-grid">${alunos.map(n=>`<button class="name-btn" onclick="selectName(this,'${n.replace(/'/g,"\\'")}')">${n}</button>`).join("")}</div>
+ <div class="namebox">
+   <label>2. Agora copie seu nome exatamente como aparece acima:</label>
+   <input id="nomeInput" autocomplete="off" placeholder="Digite seu nome">
+   <button class="btn green" onclick="confirmName()">🚀 COMEÇAR MISSÃO</button>
+ </div><div id="feedback" class="feedback"></div>`;
+}
+function selectName(el,n){
+ nomeSelecionado=n; document.querySelectorAll(".name-btn").forEach(b=>b.classList.remove("selected"));
+ el.classList.add("selected"); speak("Nome selecionado: "+n);
+}
+function norm(s){return (s||"").trim().toUpperCase().replace(/\s+/g," ")}
+function confirmName(){
+ if(!nomeSelecionado){erro("Primeiro clique no seu nome na lista.");return}
+ const typed=norm(document.getElementById("nomeInput").value);
+ if(typed!==norm(nomeSelecionado)){erro("Copie o nome exatamente como aparece na lista.");return}
+ nome=nomeSelecionado; fase=1;estrelas=0;erros=0;render();speak("Muito bem, "+nome+". Vamos começar!");
+}
+function padrao1(){
+ return `<div class="pattern">🔴 🔵 🔴 🔵 🔴 ❓</div><div class="choices">
+ <button class="big-choice" onclick="erro('Observe: vermelho, azul, vermelho, azul...')">🔴</button>
+ <button class="big-choice" onclick="acerto('Você encontrou o padrão de cores!')">🔵</button>
+ <button class="big-choice" onclick="erro('Olhe novamente a sequência.')">🟢</button>
+ </div><div id="feedback" class="feedback"></div>`;
+}
+function padrao2(){
+ return `<div class="pattern">🔺 ⚪ 🔺 ⚪ 🔺 ❓</div><div class="choices">
+ <button class="big-choice" onclick="acerto('Muito bem! Triângulo e círculo estão se alternando.')">⚪</button>
+ <button class="big-choice" onclick="erro('Veja qual forma aparece depois do triângulo.')">🔺</button>
+ <button class="big-choice" onclick="erro('Essa forma não aparece no padrão.')">⬛</button>
+ </div><div id="feedback" class="feedback"></div>`;
+}
+function seq1(){
+ seqAtual=[];
+ const itens=[["acordar","🛏️","ACORDAR"],["escovar","🪥","ESCOVAR"],["mochila","🎒","MOCHILA"],["escola","🏫","ESCOLA"]];
+ return seqUI(itens,["acordar","escovar","mochila","escola"],"Você colocou as ações em sequência!");
+}
+function seq2(){
+ seqAtual=[];
+ const itens=[["sentar","🪑","SENTAR"],["ligar","🔘","LIGAR"],["mouse","🖱️","PEGAR O MOUSE"],["atividade","🎮","COMEÇAR"]];
+ return seqUI(itens,["sentar","ligar","mouse","atividade"],"Ótimo! Você organizou passos para começar.");
+}
+function seqUI(itens,certa,msg){
+ window.seqCerta=certa;window.seqMsg=msg;
+ return `<div class="seq-row" id="seqEscolhida"><span class="sub">Clique na ordem:</span></div>
+ <div class="choices">${itens.map(x=>`<button class="seq-item" id="sq-${x[0]}" onclick="addSeq('${x[0]}','${x[1]}')">${x[1]}<small>${x[2]}</small></button>`).join("")}</div>
+ <div class="actions"><button class="btn yellow" onclick="checkSeq()">✅ CONFERIR</button><button class="btn secondary" onclick="render()">🧹 LIMPAR</button></div>
+ <div id="feedback" class="feedback"></div>`;
+}
+function addSeq(id,emoji){
+ if(seqAtual.includes(id))return;seqAtual.push(id);document.getElementById("sq-"+id).disabled=true;
+ document.getElementById("seqEscolhida").insertAdjacentHTML("beforeend",`<div class="seq-item">${emoji}<small>${seqAtual.length}</small></div>`);
+}
+function checkSeq(){
+ if(seqAtual.length!==window.seqCerta.length){erro("Escolha todas as figuras.");return}
+ if(seqAtual.every((x,i)=>x===window.seqCerta[i]))acerto(window.seqMsg);else erro("Observe o que fazemos primeiro, depois e por último.");
+}
+function class1(){
+ selected=new Set();
+ return classUI([["pc","💻",1],["bola","⚽",0],["tablet","📱",1],["livro","📚",0],["mouse","🖱️",1],["banana","🍌",0]],["pc","tablet","mouse"],"Você encontrou as tecnologias digitais!");
+}
+function class2(){
+ selected=new Set();
+ return classUI([["teclado","⌨️",1],["mouse","🖱️",1],["sapato","👟",0],["controle","🎮",1],["copo","🥤",0],["livro","📕",0]],["teclado","mouse","controle"],"Muito bem! Esses objetos ajudam a dar comandos.");
+}
+function classUI(itens,corretos,msg){
+ window.classCerta=corretos;window.classMsg=msg;
+ return `<div class="item-grid">${itens.map(x=>`<button class="item" id="it-${x[0]}" onclick="toggle('${x[0]}')">${x[1]}</button>`).join("")}</div>
+ <div class="actions"><button class="btn yellow" onclick="checkClass()">✅ CONFERIR</button></div>
+ <div id="feedback" class="feedback"></div>`;
+}
+function toggle(id){
+ const e=document.getElementById("it-"+id);if(selected.has(id)){selected.delete(id);e.classList.remove("selected")}
+ else{selected.add(id);e.classList.add("selected")}
+}
+function checkClass(){
+ const c=window.classCerta;
+ if(selected.size===c.length && c.every(x=>selected.has(x)))acerto(window.classMsg);
+ else erro("Olhe cada objeto com atenção e tente novamente.");
+}
+function rep1(){
+ return `<p class="sub">MODELO:</p><div class="pattern">👏 👏 🙌</div><div class="choices">
+ <button class="big-choice" onclick="acerto('Você repetiu a sequência corretamente!')">👏 👏 🙌</button>
+ <button class="big-choice" onclick="erro('Compare com o modelo.')">👏 🙌 👏</button>
+ <button class="big-choice" onclick="erro('A ordem está diferente.')">🙌 👏 👏</button>
+ </div><div id="feedback" class="feedback"></div>`;
+}
+function rep2(){
+ return `<div class="pattern">🍎 🍌 🍎 🍌 🍎 🍌</div><p class="sub"><b>Qual pedacinho está se repetindo?</b></p>
+ <div class="choices">
+ <button class="big-choice" onclick="acerto('Isso! Maçã e banana se repetem.')">🍎 🍌</button>
+ <button class="big-choice" onclick="erro('Veja os dois primeiros desenhos.')">🍌 🍌</button>
+ <button class="big-choice" onclick="erro('Observe desde o começo.')">🍎 🍎</button>
+ </div><div id="feedback" class="feedback"></div>`;
+}
+function log1(){
+ return `<p class="instrucao">“O computador pode obedecer a comandos.”</p>
+ <div class="binary-row">
+ <button class="binary" onclick="acerto('Correto! O computador segue comandos e instruções.')">✅ SIM</button>
+ <button class="binary" onclick="erro('Pense no robô: ele só anda quando recebe comandos.')">❌ NÃO</button>
+ </div><div id="feedback" class="feedback"></div>`;
+}
+function roboHTML(rows,cols,start,goal,walls,stars=[]){
+ let cells="";
+ for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+   let wall=walls.some(w=>w.r===r&&w.c===c);
+   cells+=`<div class="cell ${wall?"wall":""}" data-r="${r}" data-c="${c}"></div>`;
+ }
+ return `<div class="board" id="board" style="grid-template-columns:repeat(${cols},1fr)">${cells}</div>
+ <div class="controls">
+   <button class="arrow" onclick="addCmd('up')">⬆️</button>
+   <button class="arrow" onclick="addCmd('down')">⬇️</button>
+   <button class="arrow" onclick="addCmd('left')">⬅️</button>
+   <button class="arrow" onclick="addCmd('right')">➡️</button>
+ </div>
+ <div class="command-list" id="cmdList"><span class="mini-note">Monte os comandos aqui.</span></div>
+ <div class="actions"><button class="btn green" onclick="runRobot()">▶ EXECUTAR</button><button class="btn secondary" onclick="clearCmd()">🧹 LIMPAR</button></div>
+ <div id="feedback" class="feedback"></div>`;
+}
+function setupRobot(tipo){
+ if(tipo==="robo1")robot={rows:4,cols:4,start:{r:0,c:0},pos:{r:0,c:0},goal:{r:3,c:3},walls:[],stars:[],collected:[],cmds:[],running:false};
+ if(tipo==="robo2")robot={rows:4,cols:4,start:{r:3,c:0},pos:{r:3,c:0},goal:{r:0,c:3},walls:[{r:2,c:1},{r:1,c:1}],stars:[],collected:[],cmds:[],running:false};
+ if(tipo==="robo3")robot={rows:5,cols:5,start:{r:4,c:0},pos:{r:4,c:0},goal:{r:0,c:4},walls:[{r:3,c:1},{r:2,c:1},{r:2,c:3}],stars:[{r:4,c:3},{r:1,c:4}],collected:[],cmds:[],running:false};
+ paintRobot();
+}
+function paintRobot(){
+ document.querySelectorAll(".cell").forEach(cell=>{
+   const r=+cell.dataset.r,c=+cell.dataset.c;
+   const isWall=robot.walls.some(w=>w.r===r&&w.c===c);
+   const isRobot=robot.pos.r===r&&robot.pos.c===c;
+   const isGoal=robot.goal.r===r&&robot.goal.c===c;
+   const idx=robot.stars.findIndex(s=>s.r===r&&s.c===c);
+   const collected=idx>=0 && robot.collected.includes(idx);
+   cell.textContent=isWall?"🪨":isRobot?"🤖":(idx>=0&&!collected)?"⭐":isGoal?"🏁":"";
+ });
+}
+function addCmd(cmd){
+ if(robot.running||robot.cmds.length>=18)return;robot.cmds.push(cmd);refreshCmds();
+}
+function refreshCmds(){
+ const m={up:"⬆️",down:"⬇️",left:"⬅️",right:"➡️"};
+ document.getElementById("cmdList").innerHTML=robot.cmds.length?robot.cmds.map(x=>m[x]).join(" "):'<span class="mini-note">Monte os comandos aqui.</span>';
+}
+function clearCmd(){
+ if(robot.running)return;robot.cmds=[];robot.pos={...robot.start};robot.collected=[];refreshCmds();paintRobot();
+}
+async function runRobot(){
+ if(robot.running)return;if(!robot.cmds.length){erro("Escolha algumas setas primeiro.");return}
+ robot.running=true;robot.pos={...robot.start};robot.collected=[];paintRobot();
+ for(const cmd of robot.cmds){
+   await new Promise(r=>setTimeout(r,360));
+   let p={...robot.pos};if(cmd==="up")p.r--;if(cmd==="down")p.r++;if(cmd==="left")p.c--;if(cmd==="right")p.c++;
+   const fora=p.r<0||p.c<0||p.r>=robot.rows||p.c>=robot.cols;
+   const wall=robot.walls.some(w=>w.r===p.r&&w.c===p.c);
+   if(fora||wall){robot.running=false;erro(wall?"O robô bateu na pedra. Procure outro caminho.":"O robô saiu do tabuleiro.");return}
+   robot.pos=p;
+   robot.stars.forEach((s,i)=>{if(s.r===p.r&&s.c===p.c&&!robot.collected.includes(i))robot.collected.push(i)});
+   paintRobot();
+ }
+ robot.running=false;
+ const goal=robot.pos.r===robot.goal.r&&robot.pos.c===robot.goal.c;
+ const all=robot.collected.length===robot.stars.length;
+ if(goal&&all)acerto(robot.stars.length?"Você pegou as estrelas e chegou ao final!":"O robô chegou ao destino!");
+ else if(robot.stars.length&&!all)erro("Você precisa passar por todas as estrelas antes de chegar.");
+ else erro("O robô ainda não chegou ao destino.");
+}
+function superDesafio(){
+ superStep=0;
+ return `<div id="superArea">${superQ()}</div><div id="feedback" class="feedback"></div>`;
+}
+function superQ(){
+ if(superStep===0)return `<p class="instrucao">1. Qual vem depois?</p><div class="pattern">⭐ ❤️ ⭐ ❤️ ⭐ ❓</div>
+ <div class="choices"><button class="big-choice" onclick="superAns(false)">⭐</button><button class="big-choice" onclick="superAns(true)">❤️</button></div>`;
+ if(superStep===1)return `<p class="instrucao">2. Qual objeto usamos para mover a seta na tela?</p>
+ <div class="choices"><button class="big-choice" onclick="superAns(true)">🖱️<span>MOUSE</span></button><button class="big-choice" onclick="superAns(false)">🍎<span>MAÇÃ</span></button></div>`;
+ return `<p class="instrucao">3. Um robô anda sozinho sem receber nenhum comando?</p>
+ <div class="binary-row"><button class="binary" onclick="superAns(false)">✅ SIM</button><button class="binary" onclick="superAns(true)">❌ NÃO</button></div>`;
+}
+function superAns(ok){
+ if(!ok){erros++;stats();feedback("💡 Tente outra vez.",false);return}
+ estrelas++;stats();superStep++;
+ if(superStep<3){feedback("⭐ Muito bem! Próximo desafio.",true);setTimeout(()=>{document.getElementById("superArea").innerHTML=superQ();document.getElementById("feedback").className="feedback";document.getElementById("feedback").innerHTML=""},700)}
+ else{feedback("⭐ Superdesafio completo!",true);setTimeout(()=>{fase++;render()},1000)}
+}
+function finale(){
+ document.getElementById("progressBar").style.width="100%";
+ return `<div class="final-box"><div class="cert">🌟 PEQUENO PROGRAMADOR UNIVERSITAS 🌟</div>
+ <h2>${nome||"Aluno(a)"}</h2>
+ <p class="instrucao">Você reconheceu padrões, colocou ações em ordem, classificou objetos, percebeu repetições e criou comandos para o robô.</p>
+ <p class="sub"><b>Estrelas conquistadas:</b> ⭐ ${estrelas}<br><b>Tentativas:</b> ${erros}</p></div>
+ <div class="actions"><button class="btn green" onclick="restart()">🔁 JOGAR NOVAMENTE</button><button class="btn yellow" onclick="window.print()">🖨️ IMPRIMIR</button></div>`;
+}
+function restart(){fase=0;estrelas=0;erros=0;nomeSelecionado="";nome="";locked=false;render()}
+render();
+</script>
+</body>
+</html>
